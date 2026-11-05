@@ -5,8 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#18130f">
-  <meta name="description" content="NOIR & BLADE — a modern grooming house. A custom website concept by Syntax Labs.">
-  <title>NOIR & BLADE — The Grooming House</title>
+  <meta name="description" content="NOIR & BLADE — a contemporary grooming house. An interactive portfolio concept designed and developed by Syntax Labs.">
+  <title>NOIR & BLADE | The Grooming House</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,13 +14,12 @@
 
   <style>
     :root {
-      --ink: #251d17;
       --night: #18130f;
       --night-soft: #292019;
       --night-raised: #35291f;
+      --ink: #251d17;
       --paper: #eee2d1;
       --paper-light: #f8f1e8;
-      --sand: #d9c7b1;
       --cream: #f7ecde;
       --bronze: #d6a875;
       --bronze-deep: #996742;
@@ -35,7 +34,7 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 88px;
+      scroll-padding-top: 90px;
     }
 
     body {
@@ -49,7 +48,6 @@
     }
 
     body.is-locked { overflow: hidden; }
-
     img { display: block; width: 100%; }
     button, input { font: inherit; }
     button { cursor: pointer; }
@@ -61,14 +59,17 @@
       outline-offset: 4px;
     }
 
-    ::selection { background: var(--bronze); color: var(--night); }
+    ::selection {
+      background: var(--bronze);
+      color: var(--night);
+    }
 
     .wrap { width: min(1360px, 90%); margin-inline: auto; }
 
     .eyebrow {
       display: block;
       font: 800 10px var(--ui);
-      letter-spacing: 2.1px;
+      letter-spacing: 2px;
       text-transform: uppercase;
     }
 
@@ -89,11 +90,33 @@
       line-height: 1.85;
     }
 
+    .icon {
+      display: inline-block;
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vertical-align: middle;
+    }
+
+    .icon-arrow {
+      transition: transform .25s ease;
+    }
+
+    a:hover .icon-arrow,
+    button:hover .icon-arrow {
+      transform: translate(3px, -3px);
+    }
+
     .button {
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      gap: 18px;
+      gap: 15px;
       padding: 16px 25px;
       border: 1px solid var(--bronze);
       border-radius: 100px;
@@ -105,14 +128,22 @@
       transition: transform .25s, background .25s;
     }
 
-    .button:hover { transform: translateY(-2px); background: #ebc293; }
-    .button:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+    .button:hover {
+      transform: translateY(-2px);
+      background: #ebc293;
+    }
+
+    .button:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+      transform: none;
+    }
 
     .text-link {
       display: inline-flex;
       align-items: center;
       justify-content: space-between;
-      gap: 35px;
+      gap: 30px;
       padding: 13px 0;
       border-bottom: 1px solid currentColor;
       font: 800 10px var(--ui);
@@ -120,18 +151,17 @@
       text-transform: uppercase;
     }
 
-    .text-link span:last-child { font-size: 19px; }
-
     .demo-notice {
       padding: 10px 14px;
       background: #3d2a1c;
       color: #f4d8b6;
       text-align: center;
       font: 700 10px var(--ui);
+      line-height: 1.6;
       letter-spacing: .3px;
     }
 
-    /* Header and full-screen navigation */
+    /* Navigation */
 
     .site-header {
       position: sticky;
@@ -140,6 +170,7 @@
       background: rgba(24,19,15,.96);
       border-bottom: 1px solid var(--line);
       backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
     }
 
     .header-inner {
@@ -158,6 +189,7 @@
     }
 
     .wordmark b { color: var(--bronze); }
+
     .wordmark small {
       display: block;
       margin-top: 4px;
@@ -166,8 +198,16 @@
       letter-spacing: 2.2px;
     }
 
-    .header-actions { display: flex; align-items: center; gap: 28px; }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
     .header-book {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       color: var(--bronze);
       font: 800 10px var(--ui);
       letter-spacing: 1px;
@@ -214,6 +254,7 @@
     }
 
     .site-menu.is-open { display: flex; }
+
     .site-menu a {
       width: fit-content;
       font-size: clamp(38px, 8vw, 90px);
@@ -266,6 +307,7 @@
     }
 
     .hero-actions { margin-top: 25px; }
+
     .hero-foot {
       display: flex;
       gap: 24px;
@@ -278,7 +320,13 @@
 
     .hero-foot b { color: var(--bronze); margin-right: 7px; }
 
-    .hero-image { position: relative; min-height: 620px; overflow: hidden; }
+    .hero-image {
+      position: relative;
+      min-height: 620px;
+      overflow: hidden;
+      background: var(--night-raised);
+    }
+
     .hero-image img { height: 100%; object-fit: cover; }
 
     .hero-image::after {
@@ -318,7 +366,9 @@
       letter-spacing: 2px;
     }
 
-    @keyframes marquee { to { transform: translateX(-50%); } }
+    @keyframes marquee {
+      to { transform: translateX(-50%); }
+    }
 
     /* Introduction */
 
@@ -334,7 +384,10 @@
       gap: 35px;
     }
 
-    .introduction .eyebrow { padding-top: 15px; color: var(--bronze-deep); }
+    .introduction .eyebrow {
+      padding-top: 15px;
+      color: var(--bronze-deep);
+    }
 
     .introduction p {
       margin: 0;
@@ -349,6 +402,7 @@
     /* Services */
 
     .services { padding: 115px 0; }
+
     .split-heading {
       display: flex;
       justify-content: space-between;
@@ -357,7 +411,10 @@
       margin-bottom: 50px;
     }
 
-    .split-heading .section-copy { max-width: 320px; color: var(--quiet); }
+    .split-heading .section-copy {
+      max-width: 320px;
+      color: var(--quiet);
+    }
 
     .service-layout {
       display: grid;
@@ -382,7 +439,8 @@
       transition: background .25s, padding .25s;
     }
 
-    .service-item:hover, .service-item.is-active {
+    .service-item:hover,
+    .service-item.is-active {
       padding-left: 20px;
       background: #35291e;
     }
@@ -399,6 +457,7 @@
     }
 
     .service-feature img { height: 100%; object-fit: cover; }
+
     .service-feature::after {
       content: "";
       position: absolute;
@@ -418,7 +477,7 @@
     .service-feature-copy h3 { margin: 12px 0; font-size: 30px; }
     .service-feature-copy p { max-width: 390px; font-size: 13px; line-height: 1.75; }
 
-    /* The house experience */
+    /* Experience */
 
     .house-experience {
       padding: 115px 0;
@@ -444,7 +503,13 @@
       gap: 20px;
     }
 
-    .experience-large { position: relative; min-height: 600px; overflow: hidden; }
+    .experience-large {
+      position: relative;
+      min-height: 600px;
+      overflow: hidden;
+      background: #b6a28c;
+    }
+
     .experience-large img { height: 100%; object-fit: cover; }
 
     .experience-large::after {
@@ -458,6 +523,7 @@
       position: absolute;
       z-index: 1;
       left: 35px;
+      right: 35px;
       bottom: 35px;
       max-width: 440px;
       color: var(--cream);
@@ -472,12 +538,13 @@
 
     .experience-caption p { font-size: 14px; line-height: 1.8; }
 
-    .experience-side { display: grid; grid-template-rows: 1fr auto; gap: 20px; }
-
-    .experience-side img {
-      height: 310px;
-      object-fit: cover;
+    .experience-side {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 20px;
     }
+
+    .experience-side img { height: 310px; object-fit: cover; }
 
     .experience-note {
       padding: 35px;
@@ -512,19 +579,36 @@
     .experience-detail h4 { margin: 14px 0 8px; font-size: 21px; }
     .experience-detail p { margin: 0; font-size: 13px; line-height: 1.8; color: #715d4b; }
 
-    /* Artists */
+    /* Barbers */
 
     .artists { padding: 115px 0; }
-    .artist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 
-    .artist-photo { height: 425px; overflow: hidden; background: #3d3025; }
-    .artist-photo img { height: 100%; object-fit: cover; transition: transform .5s; }
+    .artist-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .artist-photo {
+      height: 425px;
+      overflow: hidden;
+      background: #3d3025;
+    }
+
+    .artist-photo img {
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s;
+    }
+
     .artist-card:hover img { transform: scale(1.04); }
-
     .artist-card h3 { margin: 20px 0 6px; font-size: 26px; letter-spacing: -.7px; }
     .artist-card p { color: var(--quiet); font-size: 13px; line-height: 1.7; }
 
     .artist-card button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
       padding: 10px 0;
       border: 0;
       border-bottom: 1px solid var(--bronze);
@@ -534,7 +618,7 @@
       letter-spacing: 1px;
     }
 
-    /* Before / after */
+    /* Editorial comparison */
 
     .transformation {
       padding: 115px 0;
@@ -552,11 +636,9 @@
       margin: auto;
       background: #1b1511;
       --split: 50%;
-      touch-action: pan-y;
-      user-select: none;
     }
 
-    .comparison img {
+    .comparison-layer {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -565,9 +647,16 @@
       pointer-events: none;
     }
 
-    .comparison .before-photo { clip-path: inset(0 calc(100% - var(--split)) 0 0); }
+    .comparison-original {
+      filter: saturate(.58) contrast(.88) brightness(.95);
+    }
 
-    .comparison .divider-line {
+    .comparison-finish {
+      clip-path: inset(0 0 0 var(--split));
+      filter: saturate(1.18) contrast(1.13) brightness(1.04);
+    }
+
+    .comparison-divider {
       position: absolute;
       z-index: 3;
       left: var(--split);
@@ -579,7 +668,7 @@
       pointer-events: none;
     }
 
-    .comparison .handle {
+    .comparison-handle {
       position: absolute;
       z-index: 4;
       top: 50%;
@@ -591,19 +680,20 @@
       border: 2px solid white;
       border-radius: 50%;
       background: var(--bronze);
-      color: #25180e;
-      font-size: 21px;
+      color: var(--ink);
       transform: translate(-50%, -50%);
       pointer-events: none;
       box-shadow: 0 5px 30px #0008;
     }
 
-    .comparison .photo-label {
+    .comparison-handle .icon { width: 25px; height: 25px; }
+
+    .photo-label {
       position: absolute;
       z-index: 2;
       top: 20px;
       padding: 10px 15px;
-      background: #18130fc9;
+      background: #18130fd9;
       color: white;
       font: 800 10px var(--ui);
       letter-spacing: 1.5px;
@@ -621,9 +711,13 @@
       margin: 0;
       opacity: 0;
       cursor: ew-resize;
+      touch-action: pan-y;
     }
 
-    .comparison input:focus-visible { outline: 3px solid var(--bronze); outline-offset: -4px; }
+    .comparison input:focus-visible {
+      outline: 3px solid var(--bronze);
+      outline-offset: -4px;
+    }
 
     .comparison-note {
       max-width: 900px;
@@ -636,16 +730,17 @@
     /* Lookbook */
 
     .lookbook { padding: 115px 0; overflow: hidden; }
-
     .lookbook-controls { display: flex; gap: 10px; }
+
     .round-button {
+      display: grid;
+      place-items: center;
       width: 47px;
       height: 47px;
       border: 1px solid #79634e;
       border-radius: 50%;
       background: transparent;
       color: var(--cream);
-      font-size: 22px;
     }
 
     .round-button:hover { background: var(--night-raised); }
@@ -672,7 +767,12 @@
       text-align: left;
     }
 
-    .lookbook-item img { height: clamp(330px, 40vw, 510px); object-fit: cover; }
+    .lookbook-item img {
+      height: clamp(330px, 40vw, 510px);
+      object-fit: cover;
+      background: var(--night-raised);
+    }
+
     .lookbook-item strong { display: block; margin-top: 16px; font-size: 18px; }
     .lookbook-item small { color: var(--bronze); font-size: 11px; }
 
@@ -723,7 +823,8 @@
       text-align: left;
     }
 
-    .booking-choice.is-selected, .booking-choice:hover {
+    .booking-choice.is-selected,
+    .booking-choice:hover {
       border-color: var(--bronze-deep);
       background: #e6d1b7;
     }
@@ -752,6 +853,8 @@
     .calendar-nav { display: flex; gap: 7px; }
 
     .calendar-nav button {
+      display: grid;
+      place-items: center;
       width: 35px;
       height: 35px;
       border: 1px solid #d1baa0;
@@ -762,7 +865,8 @@
 
     .calendar-nav button:disabled { opacity: .3; cursor: not-allowed; }
 
-    .calendar-weekdays, .calendar-days {
+    .calendar-weekdays,
+    .calendar-days {
       display: grid;
       grid-template-columns: repeat(7, minmax(0, 1fr));
       gap: 5px;
@@ -770,6 +874,7 @@
     }
 
     .calendar-weekdays { padding-bottom: 0; }
+
     .calendar-weekdays span {
       padding: 8px 0;
       color: #8a735e;
@@ -777,7 +882,8 @@
       font: 800 10px var(--ui);
     }
 
-    .calendar-days button, .calendar-empty {
+    .calendar-days button,
+    .calendar-empty {
       display: grid;
       place-items: center;
       min-height: 44px;
@@ -800,6 +906,9 @@
     }
 
     .booking-actions button {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
       padding: 14px 19px;
       border: 1px solid var(--bronze-deep);
       background: transparent;
@@ -820,6 +929,7 @@
     }
 
     .booking-summary h3 { margin: 14px 0 22px; font-size: 25px; }
+
     .summary-line {
       display: flex;
       justify-content: space-between;
@@ -831,9 +941,22 @@
 
     .summary-line span { color: var(--quiet); }
     .summary-line strong { text-align: right; font-weight: 600; }
-    .summary-total { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; }
+
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 25px;
+    }
+
     .summary-total strong { color: var(--bronze); font-size: 29px; }
-    .summary-disclaimer { margin-top: 25px; color: var(--quiet); font-size: 11px; line-height: 1.8; }
+
+    .summary-disclaimer {
+      margin-top: 25px;
+      color: var(--quiet);
+      font-size: 11px;
+      line-height: 1.8;
+    }
 
     .booking-result {
       margin-top: 25px;
@@ -844,15 +967,23 @@
       line-height: 1.9;
     }
 
-    /* Visit and footer */
+    /* Visit */
 
     .visit { padding: 115px 0; }
-    .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 65px; align-items: center; }
-    .visit-photo { height: 480px; }
+
+    .visit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 65px;
+      align-items: center;
+    }
+
+    .visit-photo { height: 480px; background: var(--night-raised); }
     .visit-photo img { height: 100%; object-fit: cover; }
     .visit-copy p { color: #c9b8a4; line-height: 1.85; }
 
     .hours { margin: 25px 0; border-top: 1px solid var(--line); }
+
     .hours div {
       display: flex;
       justify-content: space-between;
@@ -861,14 +992,38 @@
       border-bottom: 1px solid var(--line);
       font-size: 13px;
     }
+
     .hours div span:last-child { color: var(--bronze); }
 
+    /* Footer */
+
     .footer { padding: 65px 0 25px; background: #100d0a; }
-    .footer-top { display: flex; justify-content: space-between; gap: 35px; flex-wrap: wrap; }
-    .footer-wordmark { font-size: clamp(45px, 9vw, 115px); font-weight: 700; letter-spacing: -.065em; line-height: 1; }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 35px;
+      flex-wrap: wrap;
+    }
+
+    .footer-wordmark {
+      font-size: clamp(45px, 9vw, 115px);
+      font-weight: 700;
+      letter-spacing: -.065em;
+      line-height: 1;
+    }
+
     .footer-wordmark b { color: var(--bronze); }
-    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; align-items: start; }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: start;
+    }
+
     .footer-links a { color: #cdbda9; font-size: 12px; }
+
     .footer-bottom {
       display: flex;
       justify-content: space-between;
@@ -880,7 +1035,15 @@
       color: var(--quiet);
       font-size: 11px;
     }
-    .footer-bottom a { color: var(--bronze); }
+
+    .footer-bottom a {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--bronze);
+    }
+
+    .footer-bottom .icon { width: 13px; height: 13px; }
 
     .floating-book {
       position: fixed;
@@ -889,6 +1052,8 @@
       bottom: 20px;
       box-shadow: 0 10px 35px #0008;
     }
+
+    /* Lightbox */
 
     .lightbox {
       position: fixed;
@@ -899,30 +1064,48 @@
       justify-content: center;
       align-items: center;
       gap: 15px;
-      padding: 55px 20px;
+      padding: 65px 20px;
       background: #0d0a08f5;
     }
 
     .lightbox.is-open { display: flex; }
-    .lightbox img { width: auto; max-width: 100%; max-height: 75vh; object-fit: contain; }
+
+    .lightbox img {
+      width: auto;
+      max-width: 100%;
+      max-height: 75vh;
+      object-fit: contain;
+    }
+
     .lightbox p { color: var(--bronze); }
+
     .lightbox-close {
       position: absolute;
       right: 25px;
       top: 15px;
-      border: 0;
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid #79634e;
+      border-radius: 50%;
       background: transparent;
       color: white;
-      font-size: 38px;
     }
 
+    /* Motion */
+
     .reveal { opacity: 1; transform: none; }
+
     .has-motion .reveal {
       opacity: 0;
       transform: translateY(22px);
       transition: opacity .7s, transform .7s;
     }
+
     .has-motion .reveal.is-visible { opacity: 1; transform: none; }
+
+    /* Responsive layout */
 
     @media (max-width: 950px) {
       .hero { grid-template-columns: 1fr; }
@@ -943,12 +1126,20 @@
       .hero-image { min-height: 360px; }
       .hero h1 { font-size: clamp(63px, 15vw, 95px); }
       .hero-foot { margin-top: 42px; }
+
       .introduction, .services, .house-experience,
       .artists, .transformation, .lookbook,
       .booking, .visit { padding: 80px 0; }
+
       .split-heading, .experience-intro { display: block; }
       .section-heading { letter-spacing: -.045em; }
-      .service-item { grid-template-columns: 25px 1fr auto; gap: 8px; padding: 22px 5px; }
+
+      .service-item {
+        grid-template-columns: 25px 1fr auto;
+        gap: 8px;
+        padding: 22px 5px;
+      }
+
       .service-item .name { font-size: 18px; }
       .service-item .price { font-size: 13px; }
       .service-feature { min-height: 370px; }
@@ -958,7 +1149,7 @@
       .experience-details, .artist-grid { grid-template-columns: 1fr; }
       .artist-photo { height: 390px; }
       .comparison { aspect-ratio: 1 / 1.1; }
-      .comparison .handle { width: 49px; height: 49px; }
+      .comparison-handle { width: 49px; height: 49px; }
       .lookbook-item { flex-basis: 78vw; }
       .booking-panel, .booking-summary { padding: 22px; }
       .booking-options { grid-template-columns: 1fr; }
@@ -970,26 +1161,57 @@
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      *, *::before, *::after { animation: none !important; transition: none !important; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
       .has-motion .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
 
 <body>
+  <!-- Reusable vector icons -->
+  <svg xmlns="http://www.w3.org/2000/svg"
+       width="0" height="0" aria-hidden="true"
+       style="position:absolute;overflow:hidden">
+    <symbol id="arrow-up-right" viewBox="0 0 24 24">
+      <path d="M5 19 19 5M7 5h12v12"/>
+    </symbol>
+    <symbol id="arrow-right" viewBox="0 0 24 24">
+      <path d="M4 12h16m-7-7 7 7-7 7"/>
+    </symbol>
+    <symbol id="arrow-left" viewBox="0 0 24 24">
+      <path d="M20 12H4m7-7-7 7 7 7"/>
+    </symbol>
+    <symbol id="compare-arrows" viewBox="0 0 24 24">
+      <path d="M9 5 2 12l7 7M2 12h20m-7-7 7 7-7 7"/>
+    </symbol>
+    <symbol id="close-icon" viewBox="0 0 24 24">
+      <path d="M5 5 19 19M19 5 5 19"/>
+    </symbol>
+    <symbol id="refresh-icon" viewBox="0 0 24 24">
+      <path d="M20 7v5h-5M4 17v-5h5"/>
+      <path d="M5.5 9A7 7 0 0 1 18 7l2 5M4 12l2 5a7 7 0 0 0 12.5-2"/>
+    </symbol>
+  </svg>
+
   <div class="demo-notice">
     SYNTAX LABS PORTFOLIO CONCEPT — FICTIONAL BUSINESS • DEMO BOOKINGS ONLY
   </div>
 
   <header class="site-header">
     <div class="wrap header-inner">
-      <a href="#home" class="wordmark">
+      <a href="#home" class="wordmark" aria-label="NOIR and BLADE home">
         NOIR <b>&</b> BLADE
         <small>THE GROOMING HOUSE</small>
       </a>
 
       <div class="header-actions">
-        <a href="#booking" class="header-book">Reserve a Chair ↗</a>
+        <a href="#booking" class="header-book">
+          Reserve a Chair
+          <svg class="icon icon-arrow" aria-hidden="true"><use href="#arrow-up-right"/></svg>
+        </a>
         <button class="menu-button" id="menuButton" type="button"
                 aria-label="Open navigation" aria-expanded="false"
                 aria-controls="siteMenu">
@@ -1004,7 +1226,7 @@
     <a href="#services">Services</a>
     <a href="#experience">The Experience</a>
     <a href="#artists">Our Barbers</a>
-    <a href="#transformation">The Transformation</a>
+    <a href="#transformation">The Detail</a>
     <a href="#lookbook">Lookbook</a>
     <a href="#booking">Book a Chair</a>
     <p>GOOD CUTS. GOOD PEOPLE. GREAT CONVERSATION.</p>
@@ -1026,7 +1248,10 @@
           Welcome to a different kind of barber experience.
         </p>
         <div class="hero-actions">
-          <a href="#booking" class="button">Find Your Chair ↗</a>
+          <a href="#booking" class="button">
+            Find Your Chair
+            <svg class="icon icon-arrow" aria-hidden="true"><use href="#arrow-up-right"/></svg>
+          </a>
         </div>
         <div class="hero-foot">
           <span><b>01</b> REAL CRAFT</span>
@@ -1037,7 +1262,8 @@
 
       <div class="hero-image">
         <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=85"
-             alt="Warm, welcoming barbershop interior" fetchpriority="high">
+             alt="Warm, classic barbershop interior"
+             fetchpriority="high" decoding="async">
         <div class="hero-image-label">PULL UP A CHAIR. YOU'RE HOME.</div>
       </div>
     </section>
@@ -1068,9 +1294,7 @@
         <div class="split-heading reveal">
           <div>
             <span class="eyebrow bronze">002 / The Menu</span>
-            <h2 class="section-heading">
-              THE GOOD<br><em class="accent bronze">Stuff.</em>
-            </h2>
+            <h2 class="section-heading">THE GOOD<br><em class="accent bronze">Stuff.</em></h2>
           </div>
           <p class="section-copy">
             From a fresh fade to a complete reset,
@@ -1082,14 +1306,16 @@
         <div class="service-layout">
           <div class="service-list" id="serviceList"></div>
           <div class="service-feature">
-            <img id="servicePhoto" src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1000&q=85"
-                 alt="Barber working on a haircut" loading="lazy">
+            <img id="servicePhoto"
+                 src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1000&q=85"
+                 alt="Barber working on a haircut" loading="lazy" decoding="async">
             <div class="service-feature-copy">
               <span class="eyebrow bronze">Your Next Great Cut</span>
               <h3 id="serviceTitle">The House Cut</h3>
               <p id="serviceDescription">A tailored haircut with a clean finish.</p>
               <a href="#booking" class="text-link" id="serviceBooking">
-                <span>Choose This Service</span><span>↗</span>
+                Choose This Service
+                <svg class="icon icon-arrow" aria-hidden="true"><use href="#arrow-up-right"/></svg>
               </a>
             </div>
           </div>
@@ -1102,9 +1328,7 @@
         <div class="experience-intro reveal">
           <div>
             <span class="eyebrow">003 / The House Experience</span>
-            <h2 class="section-heading">
-              STAY A<br><em class="accent">While.</em>
-            </h2>
+            <h2 class="section-heading">STAY A<br><em class="accent">While.</em></h2>
           </div>
           <p class="section-copy">
             The best part of a barbershop isn't just the haircut.
@@ -1116,7 +1340,8 @@
         <div class="experience-grid">
           <div class="experience-large reveal">
             <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=85"
-                 alt="Classic barber chairs in a welcoming grooming space" loading="lazy">
+                 alt="Classic barber chairs and a welcoming grooming space"
+                 loading="lazy" decoding="async">
             <div class="experience-caption">
               <span class="eyebrow bronze">Make Yourself Comfortable</span>
               <h3>More than a cut.<br>A little time for you.</h3>
@@ -1125,8 +1350,9 @@
           </div>
 
           <div class="experience-side">
-            <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=900&q=85"
-                 alt="Traditional barbering craftsmanship" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=85"
+                 alt="Barber carefully working on a client's grooming"
+                 loading="lazy" decoding="async">
             <div class="experience-note">
               <h3>Good company.<br>Great atmosphere.</h3>
               <p>
@@ -1164,8 +1390,7 @@
           <div>
             <span class="eyebrow bronze">004 / The People</span>
             <h2 class="section-heading">
-              GOOD HANDS.<br>
-              <em class="accent bronze">Good Company.</em>
+              GOOD HANDS.<br><em class="accent bronze">Good Company.</em>
             </h2>
           </div>
           <p class="section-copy">
@@ -1180,33 +1405,41 @@
     <section class="transformation" id="transformation">
       <div class="wrap">
         <div class="transformation-intro reveal">
-          <span class="eyebrow bronze">005 / The Transformation</span>
+          <span class="eyebrow bronze">005 / The Detail</span>
           <h2 class="section-heading">
-            SEE THE<br><em class="accent bronze">Difference.</em>
+            EVERY DETAIL<br><em class="accent bronze">Matters.</em>
           </h2>
           <p class="section-copy">
-            A fresh cut changes how you carry yourself.
-            Drag the slider to explore this interactive
-            grooming inspiration comparison.
+            Great presentation is all about the finishing touches.
+            Drag the slider to explore two visual treatments
+            of the same grooming photograph.
           </p>
         </div>
 
         <div class="comparison" id="comparison">
-          <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=85"
-               alt="Illustrative barbershop scene used as the after image" loading="lazy">
-          <img class="before-photo"
-               src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1200&q=85"
-               alt="Different illustrative barbershop scene used as the before image" loading="lazy">
-          <span class="photo-label left">BEFORE</span>
-          <span class="photo-label right">AFTER</span>
-          <div class="divider-line"></div>
-          <div class="handle" aria-hidden="true">↔</div>
+          <img class="comparison-layer comparison-original"
+               src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=1400&q=85"
+               alt="Barber grooming photograph with a muted editorial treatment"
+               loading="lazy">
+          <img class="comparison-layer comparison-finish"
+               src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=1400&q=85"
+               alt="The same photograph with a richer, finished color treatment"
+               loading="lazy">
+
+          <span class="photo-label left">ORIGINAL</span>
+          <span class="photo-label right">EDITORIAL FINISH</span>
+
+          <div class="comparison-divider"></div>
+          <div class="comparison-handle" aria-hidden="true">
+            <svg class="icon"><use href="#compare-arrows"/></svg>
+          </div>
+
           <input id="comparisonRange" type="range" min="0" max="100" value="50"
-                 aria-label="Move slider to compare the two illustrative photographs">
+                 aria-label="Compare original and finished photograph">
         </div>
         <p class="comparison-note">
-          Interactive concept demonstration. These are separate illustrative
-          photographs, not a documented before-and-after result from one client.
+          Interactive photography treatment concept. Both sides show the same
+          photograph with different color grading, not a client haircut transformation.
         </p>
       </div>
     </section>
@@ -1221,14 +1454,18 @@
             </h2>
           </div>
           <div class="lookbook-controls">
-            <button class="round-button" id="lookPrev" type="button" aria-label="Previous photo">←</button>
-            <button class="round-button" id="lookNext" type="button" aria-label="Next photo">→</button>
+            <button class="round-button" id="lookPrev" type="button" aria-label="Previous photograph">
+              <svg class="icon"><use href="#arrow-left"/></svg>
+            </button>
+            <button class="round-button" id="lookNext" type="button" aria-label="Next photograph">
+              <svg class="icon"><use href="#arrow-right"/></svg>
+            </button>
           </div>
         </div>
         <div class="lookbook-track" id="lookbookTrack"></div>
-        <p style="color:var(--quiet);font-size:12px">
+        <p style="color:var(--quiet);font-size:12px;line-height:1.8">
           Swipe to explore. Tap any image for a closer look.
-          Photographs are illustrative.
+          Photography is illustrative.
         </p>
       </div>
     </section>
@@ -1247,13 +1484,20 @@
 
         <div class="booking-grid">
           <div class="booking-panel">
-            <div class="booking-progress" id="bookingProgress">
+            <div class="booking-progress" id="bookingProgress"
+                 aria-label="Booking progress">
               <i class="is-active"></i><i></i><i></i><i></i>
             </div>
             <div id="bookingContent" aria-live="polite"></div>
             <div class="booking-actions">
-              <button id="bookingBack" type="button">← BACK</button>
-              <button id="bookingNext" class="next" type="button">CONTINUE →</button>
+              <button id="bookingBack" type="button">
+                <svg class="icon" aria-hidden="true"><use href="#arrow-left"/></svg>
+                BACK
+              </button>
+              <button id="bookingNext" class="next" type="button">
+                CONTINUE
+                <svg class="icon" aria-hidden="true"><use href="#arrow-right"/></svg>
+              </button>
             </div>
           </div>
 
@@ -1279,8 +1523,9 @@
     <section class="visit" id="visit">
       <div class="wrap visit-grid">
         <div class="visit-photo">
-          <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=1100&q=85"
-               alt="Barber carefully grooming a client" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1100&q=85"
+               alt="Traditional barbering craftsmanship"
+               loading="lazy" decoding="async">
         </div>
         <div class="visit-copy">
           <span class="eyebrow bronze">008 / The House</span>
@@ -1303,7 +1548,8 @@
           </p>
           <a class="text-link" href="https://syntax-labs-website.pages.dev/"
              target="_blank" rel="noopener noreferrer">
-            <span>Explore Syntax Labs</span><span>↗</span>
+            Explore Syntax Labs
+            <svg class="icon icon-arrow" aria-hidden="true"><use href="#arrow-up-right"/></svg>
           </a>
         </div>
       </div>
@@ -1325,19 +1571,29 @@
       </div>
       <div class="footer-bottom">
         <span>© <span id="year"></span> NOIR & BLADE — Fictional Portfolio Concept</span>
-        <span>Custom Designed & Developed by
+        <span>
+          Custom Designed & Developed by
           <a href="https://syntax-labs-website.pages.dev/"
-             target="_blank" rel="noopener noreferrer">SYNTAX LABS ↗</a>
+             target="_blank" rel="noopener noreferrer">
+            SYNTAX LABS
+            <svg class="icon icon-arrow" aria-hidden="true"><use href="#arrow-up-right"/></svg>
+          </a>
         </span>
       </div>
     </div>
   </footer>
 
-  <a href="#booking" class="button floating-book">BOOK A CHAIR ↗</a>
+  <a href="#booking" class="button floating-book">
+    BOOK A CHAIR
+    <svg class="icon icon-arrow" aria-hidden="true"><use href="#arrow-up-right"/></svg>
+  </a>
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true"
-       aria-label="Lookbook photograph" aria-hidden="true">
-    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close photo">×</button>
+       aria-label="Lookbook photograph" aria-hidden="true" inert>
+    <button class="lightbox-close" id="lightboxClose" type="button"
+            aria-label="Close photograph">
+      <svg class="icon" aria-hidden="true"><use href="#close-icon"/></svg>
+    </button>
     <img id="lightboxPhoto" alt="">
     <p id="lightboxCaption"></p>
   </div>
@@ -1347,14 +1603,19 @@
 "use strict";
 
 const $ = id => document.getElementById(id);
-const motionReduced = matchMedia("(prefers-reduced-motion: reduce)");
+const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+
+const icon = (name, extraClass = "") => `
+  <svg class="icon ${extraClass}" aria-hidden="true">
+    <use href="#${name}"></use>
+  </svg>
+`;
 
 const photos = {
-  shop: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1100&q=85",
-  cut: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1100&q=85",
-  beard: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=1100&q=85",
-  classic: "https://images.unsplash.com/photo-1593702295094-aea22597af65?auto=format&fit=crop&w=1100&q=85",
-  detail: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1100&q=85"
+  interior: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1100&q=85",
+  haircut: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1100&q=85",
+  grooming: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=1100&q=85",
+  styling: "https://images.unsplash.com/photo-1593702295094-aea22597af65?auto=format&fit=crop&w=1100&q=85"
 };
 
 const services = [
@@ -1363,7 +1624,7 @@ const services = [
     name: "The House Cut",
     price: 35,
     minutes: 45,
-    image: photos.cut,
+    image: photos.haircut,
     description: "A tailored haircut, thoughtful consultation, and a clean finish that feels just right."
   },
   {
@@ -1371,7 +1632,7 @@ const services = [
     name: "The Fresh Fade",
     price: 40,
     minutes: 50,
-    image: photos.classic,
+    image: photos.styling,
     description: "Smooth transitions, sharp details, and a modern look built around your style."
   },
   {
@@ -1379,7 +1640,7 @@ const services = [
     name: "Beard & Beyond",
     price: 25,
     minutes: 30,
-    image: photos.beard,
+    image: photos.grooming,
     description: "Careful shaping, clean lines, and a well-groomed finish."
   },
   {
@@ -1387,7 +1648,7 @@ const services = [
     name: "The Classic",
     price: 38,
     minutes: 45,
-    image: photos.shop,
+    image: photos.interior,
     description: "Traditional scissor work with a relaxed, modern touch."
   },
   {
@@ -1395,7 +1656,7 @@ const services = [
     name: "The Full Experience",
     price: 65,
     minutes: 75,
-    image: photos.detail,
+    image: photos.grooming,
     description: "Haircut, beard detailing, and finishing touches. Your complete grooming reset."
   }
 ];
@@ -1405,27 +1666,27 @@ const barbers = [
     id: "marcus",
     name: "Marcus Cole",
     specialty: "Classic Cuts & Styling",
-    image: photos.classic
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=85"
   },
   {
     id: "jordan",
     name: "Jordan Reyes",
     specialty: "Modern Fades & Detail",
-    image: photos.cut
+    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=85"
   },
   {
     id: "alex",
     name: "Alex Morgan",
     specialty: "Beard Grooming & Finishing",
-    image: photos.beard
+    image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=900&q=85"
   }
 ];
 
 const looks = [
-  { title: "The Precision Cut", type: "Modern Grooming", image: photos.cut },
-  { title: "The Classic Finish", type: "Traditional Style", image: photos.classic },
-  { title: "The Grooming Ritual", type: "Beard & Detail", image: photos.beard },
-  { title: "The House Experience", type: "Barbershop Culture", image: photos.shop }
+  { title: "The Precision Cut", type: "Modern Grooming", image: photos.haircut },
+  { title: "The Classic Finish", type: "Traditional Style", image: photos.styling },
+  { title: "The Grooming Ritual", type: "Beard & Detail", image: photos.grooming },
+  { title: "The House Experience", type: "Barbershop Culture", image: photos.interior }
 ];
 
 const booking = {
@@ -1446,8 +1707,10 @@ function localDateKey(date) {
 
 function parseDateKey(key) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(key)) return null;
+
   const [year, month, day] = key.split("-").map(Number);
   const date = new Date(year, month - 1, day, 12);
+
   return date.getFullYear() === year &&
     date.getMonth() === month - 1 &&
     date.getDate() === day ? date : null;
@@ -1485,7 +1748,7 @@ function selectedBarber() {
 
 function scrollToBooking() {
   $("booking").scrollIntoView({
-    behavior: motionReduced.matches ? "auto" : "smooth"
+    behavior: reducedMotion.matches ? "auto" : "smooth"
   });
 }
 
@@ -1497,9 +1760,20 @@ const siteMenu = $("siteMenu");
 function setMenu(open) {
   siteMenu.classList.toggle("is-open", open);
   siteMenu.inert = !open;
+
   menuButton.setAttribute("aria-expanded", String(open));
-  menuButton.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+  menuButton.setAttribute(
+    "aria-label",
+    open ? "Close navigation" : "Open navigation"
+  );
+
   document.body.classList.toggle("is-locked", open);
+
+  if (open) {
+    siteMenu.querySelector("a").focus();
+  } else {
+    menuButton.focus();
+  }
 }
 
 menuButton.addEventListener("click", () => {
@@ -1510,14 +1784,15 @@ siteMenu.querySelectorAll("a").forEach(link => {
   link.addEventListener("click", () => setMenu(false));
 });
 
-/* Services */
+/* Service selector */
 
 let highlightedService = services[0].id;
 
 function renderServices() {
   $("serviceList").innerHTML = services.map((service, index) => `
     <button class="service-item ${service.id === highlightedService ? "is-active" : ""}"
-            type="button" data-service="${service.id}"
+            type="button"
+            data-service="${service.id}"
             aria-pressed="${service.id === highlightedService}">
       <span class="number">${pad(index + 1)}</span>
       <span class="name">${service.name}</span>
@@ -1536,8 +1811,9 @@ function renderServices() {
 
 function updateServiceFeature() {
   const service = services.find(item => item.id === highlightedService);
+
   $("servicePhoto").src = service.image;
-  $("servicePhoto").alt = `${service.name} — illustrative barbering photograph`;
+  $("servicePhoto").alt = `${service.name} — illustrative grooming photograph`;
   $("serviceTitle").textContent = service.name;
   $("serviceDescription").textContent = service.description;
 }
@@ -1546,6 +1822,7 @@ $("serviceBooking").addEventListener("click", () => {
   booking.service = highlightedService;
   booking.step = 1;
   booking.finished = false;
+  booking.time = "";
   renderBooking();
 });
 
@@ -1555,8 +1832,9 @@ function renderArtists() {
   $("artistGrid").innerHTML = barbers.map((barber, index) => `
     <article class="artist-card">
       <div class="artist-photo">
-        <img src="${barber.image}" loading="lazy"
-             alt="Illustrative photograph for fictional barber ${barber.name}">
+        <img src="${barber.image}"
+             alt="Illustrative portrait for fictional barber ${barber.name}"
+             loading="lazy" decoding="async">
       </div>
       <span class="eyebrow bronze" style="margin-top:18px">
         BARBER / ${pad(index + 1)}
@@ -1564,7 +1842,8 @@ function renderArtists() {
       <h3>${barber.name}</h3>
       <p>${barber.specialty}</p>
       <button type="button" data-artist="${barber.id}">
-        CHOOSE THIS BARBER ↗
+        CHOOSE THIS BARBER
+        ${icon("arrow-up-right", "icon-arrow")}
       </button>
     </article>
   `).join("");
@@ -1580,12 +1859,15 @@ function renderArtists() {
   });
 }
 
-/* Before / after comparison */
+/* Photography comparison */
 
 const comparisonRange = $("comparisonRange");
 
 function updateComparison() {
-  $("comparison").style.setProperty("--split", comparisonRange.value + "%");
+  $("comparison").style.setProperty(
+    "--split",
+    comparisonRange.value + "%"
+  );
 }
 
 comparisonRange.addEventListener("input", updateComparison);
@@ -1595,11 +1877,13 @@ updateComparison();
 
 function renderLookbook() {
   $("lookbookTrack").innerHTML = looks.map((look, index) => `
-    <button class="lookbook-item" type="button" data-look="${index}"
+    <button class="lookbook-item" type="button"
+            data-look="${index}"
             aria-label="View ${look.title}">
-      <img src="${look.image}" loading="lazy" alt="${look.title} inspiration">
+      <img src="${look.image}" loading="lazy"
+           decoding="async" alt="${look.title} inspiration">
       <strong>${look.title}</strong>
-      <small>${look.type} ↗</small>
+      <small>${look.type}</small>
     </button>
   `).join("");
 
@@ -1613,13 +1897,14 @@ function renderLookbook() {
 function moveLookbook(direction) {
   const track = $("lookbookTrack");
   const item = track.querySelector(".lookbook-item");
+
   if (!item) return;
 
   const gap = parseFloat(getComputedStyle(track).gap) || 18;
 
   track.scrollBy({
     left: direction * (item.getBoundingClientRect().width + gap),
-    behavior: motionReduced.matches ? "auto" : "smooth"
+    behavior: reducedMotion.matches ? "auto" : "smooth"
   });
 }
 
@@ -1633,11 +1918,15 @@ function openLightbox(index) {
   if (!look) return;
 
   lightboxPreviousFocus = document.activeElement;
+
   $("lightboxPhoto").src = look.image;
   $("lightboxPhoto").alt = look.title;
   $("lightboxCaption").textContent = look.title;
+
   $("lightbox").classList.add("is-open");
   $("lightbox").setAttribute("aria-hidden", "false");
+  $("lightbox").inert = false;
+
   document.body.classList.add("is-locked");
   $("lightboxClose").focus();
 }
@@ -1647,7 +1936,9 @@ function closeLightbox() {
 
   $("lightbox").classList.remove("is-open");
   $("lightbox").setAttribute("aria-hidden", "true");
+  $("lightbox").inert = true;
   $("lightboxPhoto").removeAttribute("src");
+
   document.body.classList.remove("is-locked");
 
   if (lightboxPreviousFocus) lightboxPreviousFocus.focus();
@@ -1668,21 +1959,25 @@ $("lightbox").addEventListener("keydown", event => {
 
 document.addEventListener("keydown", event => {
   if (event.key === "Escape") {
-    closeLightbox();
-    setMenu(false);
+    if ($("lightbox").classList.contains("is-open")) {
+      closeLightbox();
+    } else if (siteMenu.classList.contains("is-open")) {
+      setMenu(false);
+    }
   }
 });
 
-/* Calendar */
+/* Booking calendar */
 
-let visibleMonth = new Date(today().getFullYear(), today().getMonth(), 1);
+let visibleMonth = new Date(
+  today().getFullYear(),
+  today().getMonth(),
+  1
+);
 
 function isBookableDay(date) {
-  const start = today();
-  const end = lastBookingDate();
-
-  return date >= start &&
-    date <= end &&
+  return date >= today() &&
+    date <= lastBookingDate() &&
     date.getDay() !== 0;
 }
 
@@ -1692,9 +1987,18 @@ function renderCalendar() {
   const firstDay = new Date(year, month, 1);
   const dayCount = new Date(year, month + 1, 0).getDate();
 
-  const earliestMonth = new Date(today().getFullYear(), today().getMonth(), 1);
-  const latest = lastBookingDate();
-  const latestMonth = new Date(latest.getFullYear(), latest.getMonth(), 1);
+  const earliestMonth = new Date(
+    today().getFullYear(),
+    today().getMonth(),
+    1
+  );
+
+  const last = lastBookingDate();
+  const latestMonth = new Date(
+    last.getFullYear(),
+    last.getMonth(),
+    1
+  );
 
   let days = "";
 
@@ -1709,7 +2013,8 @@ function renderCalendar() {
     const selected = booking.date === key;
 
     days += `
-      <button type="button" data-date="${key}"
+      <button type="button"
+              data-date="${key}"
               aria-label="${formatDate(key)}"
               aria-pressed="${selected}"
               class="${selected ? "is-selected" : ""}"
@@ -1734,19 +2039,26 @@ function renderCalendar() {
           month: "long",
           year: "numeric"
         })}</strong>
+
         <div class="calendar-nav">
           <button id="previousMonth" type="button"
                   aria-label="Previous month"
-                  ${visibleMonth <= earliestMonth ? "disabled" : ""}>←</button>
+                  ${visibleMonth <= earliestMonth ? "disabled" : ""}>
+            ${icon("arrow-left")}
+          </button>
           <button id="nextMonth" type="button"
                   aria-label="Next month"
-                  ${visibleMonth >= latestMonth ? "disabled" : ""}>→</button>
+                  ${visibleMonth >= latestMonth ? "disabled" : ""}>
+            ${icon("arrow-right")}
+          </button>
         </div>
       </div>
+
       <div class="calendar-weekdays">
         <span>SU</span><span>MO</span><span>TU</span>
         <span>WE</span><span>TH</span><span>FR</span><span>SA</span>
       </div>
+
       <div class="calendar-days">${days}</div>
     </div>
   `;
@@ -1773,13 +2085,14 @@ function renderCalendar() {
   });
 }
 
-/* Sample appointment times */
+/* Appointment slots */
 
 function formatClock(minutes) {
   const hour24 = Math.floor(minutes / 60);
   const minute = minutes % 60;
   const suffix = hour24 >= 12 ? "PM" : "AM";
   const hour12 = hour24 % 12 || 12;
+
   return `${hour12}:${pad(minute)} ${suffix}`;
 }
 
@@ -1794,19 +2107,24 @@ function availableSampleTimes() {
   const closing = saturday ? 18 * 60 : 19 * 60;
   const times = [];
 
-  for (let start = opening; start + service.minutes <= closing; start += 60) {
+  for (
+    let start = opening;
+    start + service.minutes <= closing;
+    start += 60
+  ) {
     times.push(formatClock(start));
   }
 
   return times;
 }
 
-/* Booking flow */
+/* Booking interface */
 
 function bookingChoice(label, detail, value, selected, attribute) {
   return `
     <button class="booking-choice ${selected ? "is-selected" : ""}"
-            type="button" ${attribute}="${value}"
+            type="button"
+            ${attribute}="${value}"
             aria-pressed="${selected}">
       <strong>${label}</strong>
       <small>${detail}</small>
@@ -1824,6 +2142,14 @@ function updateBookingSummary() {
   $("summaryTime").textContent = booking.time || "Not selected";
   $("summaryDuration").textContent = service ? service.minutes + " min" : "—";
   $("summaryTotal").textContent = service ? money(service.price) : "$0.00";
+}
+
+function setNextButton(label, disabled) {
+  $("bookingNext").disabled = disabled;
+  $("bookingNext").innerHTML = `
+    ${label}
+    ${icon("arrow-right")}
+  `;
 }
 
 function renderBooking() {
@@ -1844,21 +2170,25 @@ function renderBooking() {
       <span class="eyebrow">Appointment Preview</span>
       <h3>Looking good already.</h3>
       <p>Here's how your sample appointment would look.</p>
+
       <div class="booking-result">
         <strong>${service.name}</strong><br>
         With ${barber.name}<br>
         ${formatDate(booking.date)}<br>
         ${booking.time}<br>
         ${money(service.price)}
+
         <p>
           This is a demonstration only.
           No appointment was reserved, confirmed,
           transmitted, or saved.
         </p>
       </div>
+
       <button class="button" id="restartBooking"
               type="button" style="margin-top:25px">
-        START AGAIN ↻
+        START AGAIN
+        ${icon("refresh-icon")}
       </button>
     `;
 
@@ -1871,9 +2201,16 @@ function renderBooking() {
         time: "",
         finished: false
       });
-      visibleMonth = new Date(today().getFullYear(), today().getMonth(), 1);
+
+      visibleMonth = new Date(
+        today().getFullYear(),
+        today().getMonth(),
+        1
+      );
+
       renderBooking();
     });
+
     return;
   }
 
@@ -1882,6 +2219,7 @@ function renderBooking() {
       <span class="eyebrow">Step 01 / The Service</span>
       <h3>What are we doing today?</h3>
       <p>Choose the grooming experience that suits you.</p>
+
       <div class="booking-options">
         ${services.map(service => bookingChoice(
           service.name,
@@ -1896,14 +2234,15 @@ function renderBooking() {
     $("bookingContent").querySelectorAll("[data-book-service]").forEach(button => {
       button.addEventListener("click", () => {
         const changed = booking.service !== button.dataset.bookService;
+
         booking.service = button.dataset.bookService;
         if (changed) booking.time = "";
+
         renderBooking();
       });
     });
 
-    $("bookingNext").disabled = !booking.service;
-    $("bookingNext").textContent = "CHOOSE BARBER →";
+    setNextButton("CHOOSE BARBER", !booking.service);
   }
 
   if (booking.step === 1) {
@@ -1911,6 +2250,7 @@ function renderBooking() {
       <span class="eyebrow">Step 02 / The Barber</span>
       <h3>Who's taking care of you?</h3>
       <p>Choose your preferred barber.</p>
+
       <div class="booking-options">
         ${barbers.map(barber => bookingChoice(
           barber.name,
@@ -1929,25 +2269,27 @@ function renderBooking() {
       });
     });
 
-    $("bookingNext").disabled = !booking.barber;
-    $("bookingNext").textContent = "CHOOSE DATE →";
+    setNextButton("CHOOSE DATE", !booking.barber);
   }
 
   if (booking.step === 2) {
     const date = parseDateKey(booking.date);
+
     if (booking.date && (!date || !isBookableDay(date))) {
       booking.date = "";
       booking.time = "";
     }
 
     renderCalendar();
-    $("bookingNext").disabled = !booking.date;
-    $("bookingNext").textContent = "CHOOSE TIME →";
+    setNextButton("CHOOSE TIME", !booking.date);
   }
 
   if (booking.step === 3) {
     const times = availableSampleTimes();
-    if (!times.includes(booking.time)) booking.time = "";
+
+    if (!times.includes(booking.time)) {
+      booking.time = "";
+    }
 
     $("bookingContent").innerHTML = `
       <span class="eyebrow">Step 04 / The Time</span>
@@ -1956,6 +2298,7 @@ function renderBooking() {
         Choose a sample time for ${formatDate(booking.date)}.
         These slots do not represent real availability.
       </p>
+
       <div class="booking-options">
         ${times.map(time => bookingChoice(
           time,
@@ -1974,8 +2317,7 @@ function renderBooking() {
       });
     });
 
-    $("bookingNext").disabled = !booking.time;
-    $("bookingNext").textContent = "PREVIEW APPOINTMENT →";
+    setNextButton("PREVIEW APPOINTMENT", !booking.time);
   }
 
   updateBookingSummary();
@@ -2003,12 +2345,12 @@ $("bookingNext").addEventListener("click", () => {
   renderBooking();
 });
 
-/* Subtle entrance animations */
+/* Entrance animation */
 
 function setupReveals() {
   const elements = document.querySelectorAll(".reveal");
 
-  if (motionReduced.matches || !("IntersectionObserver" in window)) {
+  if (reducedMotion.matches || !("IntersectionObserver" in window)) {
     elements.forEach(element => element.classList.add("is-visible"));
     return;
   }
@@ -2029,7 +2371,36 @@ function setupReveals() {
   document.body.classList.add("has-motion");
 }
 
-/* Start */
+/* Image fallback */
+
+function setupImageFallbacks() {
+  const fallback = `data:image/svg+xml,${encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" width="800" height="600">
+      <rect width="800" height="600" fill="#35291f"/>
+      <path d="M0 450L300 220 480 370 650 170 800 320V600H0Z"
+            fill="#4b392b"/>
+      <text x="400" y="520" text-anchor="middle"
+            font-family="Arial,sans-serif" font-size="24"
+            fill="#d6a875" letter-spacing="5">NOIR &amp; BLADE</text>
+    </svg>
+  `)}`;
+
+  document.addEventListener("error", event => {
+    const image = event.target;
+
+    if (
+      image instanceof HTMLImageElement &&
+      !image.dataset.fallbackApplied
+    ) {
+      image.dataset.fallbackApplied = "true";
+      image.src = fallback;
+    }
+  }, true);
+}
+
+/* Initialize */
+
+setupImageFallbacks();
 
 $("year").textContent = new Date().getFullYear();
 
