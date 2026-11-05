@@ -1,1803 +1,2044 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#17130f">
-<meta name="description" content="NOIR & BLADE, a fictional luxury grooming house website concept created by Syntax Labs.">
-<title>NOIR & BLADE — The Grooming House</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#18130f">
+  <meta name="description" content="NOIR & BLADE — a modern grooming house. A custom website concept by Syntax Labs.">
+  <title>NOIR & BLADE — The Grooming House</title>
 
-<style>
-:root{
-  --bg:#17130f;
-  --dark:#211a15;
-  --dark2:#30251d;
-  --cream:#f4eadb;
-  --paper:#e9ddcc;
-  --paper2:#ded0bc;
-  --ink:#2a211b;
-  --muted:#a99a89;
-  --caramel:#d4a773;
-  --line:rgba(244,234,219,.18);
-  --font:"DM Sans",sans-serif;
-  --ui:"Manrope",sans-serif;
-  --serif:"Playfair Display",Georgia,serif;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:82px}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--cream);
-  font-family:var(--font);
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
-body.menu-open,body.lightbox-open{overflow:hidden}
-a{color:inherit;text-decoration:none}
-button,input{font:inherit}
-button{cursor:pointer}
-button:focus-visible,a:focus-visible,input:focus-visible{
-  outline:2px solid var(--caramel);
-  outline-offset:4px;
-}
-img{display:block;max-width:100%}
-[hidden]{display:none!important}
-.container{width:min(1360px,90%);margin:auto}
-.italic{font-family:var(--serif);font-weight:500}
-.kicker{
-  font:800 10px var(--ui);
-  letter-spacing:2.3px;
-  text-transform:uppercase;
-}
-.section-title{
-  font-size:clamp(42px,7vw,94px);
-  line-height:1.03;
-  letter-spacing:-3.5px;
-  font-weight:600;
-  margin:20px 0;
-}
-.section-title .italic{color:#9a643f}
-.copy{font-size:15px;line-height:1.85}
-.arrow-link{
-  display:inline-flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:35px;
-  padding:15px 0;
-  border-bottom:1px solid currentColor;
-  font:800 11px var(--ui);
-  letter-spacing:1.3px;
-  text-transform:uppercase;
-}
-.arrow-link span:last-child{font-size:20px;transition:transform .3s}
-.arrow-link:hover span:last-child{transform:translate(4px,-4px)}
-.pill{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:15px 24px;
-  background:var(--caramel);
-  color:#24170e;
-  border:1px solid var(--caramel);
-  border-radius:100px;
-  font:800 11px var(--ui);
-  letter-spacing:1.2px;
-  text-transform:uppercase;
-  transition:background .25s,transform .25s;
-}
-.pill:hover{background:#e9bf8d;transform:translateY(-2px)}
-.pill.outline{background:transparent;color:var(--cream)}
-.pill.outline:hover{background:#ffffff14}
-.pill:disabled{opacity:.4;cursor:not-allowed;transform:none}
-.demo-banner{
-  padding:9px 12px;
-  text-align:center;
-  background:#3a291c;
-  color:#f4d7b1;
-  font:700 10px var(--ui);
-  letter-spacing:.5px;
-}
-.site-header{
-  position:sticky;
-  top:0;
-  z-index:110;
-  background:rgba(23,19,15,.95);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--line);
-}
-.header-inner{
-  height:79px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-}
-.brand{
-  font-size:21px;
-  font-weight:800;
-  letter-spacing:-.9px;
-  white-space:nowrap;
-}
-.brand span{color:var(--caramel)}
-.brand small{
-  display:block;
-  font:700 8px var(--ui);
-  letter-spacing:2.3px;
-  margin-top:5px;
-  color:var(--muted);
-}
-.header-right{display:flex;align-items:center;gap:25px}
-.header-book{
-  font:800 10px var(--ui);
-  letter-spacing:1.3px;
-  text-transform:uppercase;
-  color:var(--caramel);
-}
-.menu-toggle{
-  width:47px;
-  height:47px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:6px;
-  background:transparent;
-  border:1px solid #76604b;
-  border-radius:50%;
-}
-.menu-toggle span{
-  width:19px;height:1.5px;
-  background:var(--cream);
-  transition:.3s;
-}
-.menu-toggle[aria-expanded=true] span:first-child{
-  transform:translateY(3.75px) rotate(45deg);
-}
-.menu-toggle[aria-expanded=true] span:last-child{
-  transform:translateY(-3.75px) rotate(-45deg);
-}
-.full-menu{
-  position:fixed;
-  z-index:105;
-  inset:0;
-  display:none;
-  background:#201912;
-  padding:125px 5% 45px;
-  overflow-y:auto;
-}
-.full-menu.open{display:flex;flex-direction:column;justify-content:center}
-.full-menu a{
-  display:block;
-  width:fit-content;
-  font-size:clamp(37px,8vw,90px);
-  line-height:1.13;
-  font-weight:600;
-  letter-spacing:-2px;
-  transition:color .2s,transform .2s;
-}
-.full-menu a:hover{color:var(--caramel);transform:translateX(10px)}
-.menu-footer{margin-top:30px;color:var(--muted);font-size:12px}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
 
-/* HERO: EDITORIAL SPLIT */
+  <style>
+    :root {
+      --ink: #251d17;
+      --night: #18130f;
+      --night-soft: #292019;
+      --night-raised: #35291f;
+      --paper: #eee2d1;
+      --paper-light: #f8f1e8;
+      --sand: #d9c7b1;
+      --cream: #f7ecde;
+      --bronze: #d6a875;
+      --bronze-deep: #996742;
+      --quiet: #b9a894;
+      --line: rgba(247,236,222,.18);
+      --body: "DM Sans", sans-serif;
+      --ui: "Manrope", sans-serif;
+      --accent: "Playfair Display", Georgia, serif;
+    }
 
-.hero{
-  min-height:750px;
-  display:grid;
-  grid-template-columns:52% 48%;
-  position:relative;
-  overflow:hidden;
-}
-.hero-left{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:80px max(5vw,30px);
-  position:relative;
-  z-index:2;
-}
-.hero-left:before{
-  content:"";
-  position:absolute;
-  width:430px;height:430px;
-  left:-200px;bottom:-220px;
-  background:#a9774b16;
-  border-radius:50%;
-  filter:blur(50px);
-  pointer-events:none;
-}
-.hero-kicker{color:var(--caramel)}
-.hero h1{
-  font-size:clamp(67px,9.2vw,150px);
-  font-weight:600;
-  line-height:.91;
-  letter-spacing:-6px;
-  margin:33px 0;
-}
-.hero h1 .italic{
-  display:block;
-  color:var(--caramel);
-  font-size:.83em;
-  letter-spacing:-5px;
-}
-.hero-description{
-  max-width:420px;
-  font-size:15px;
-  line-height:1.85;
-  color:#c9b9a6;
-  margin-bottom:35px;
-}
-.hero-photo{
-  position:relative;
-  min-height:650px;
-  background:#382b22;
-  overflow:hidden;
-}
-.hero-photo img{
-  width:100%;height:100%;
-  position:absolute;inset:0;
-  object-fit:cover;
-  filter:saturate(.75) contrast(1.06);
-}
-.hero-photo:after{
-  content:"";
-  position:absolute;inset:0;
-  background:linear-gradient(90deg,#17130f20,transparent 55%),
-    linear-gradient(0deg,#17130f8a,transparent 40%);
-}
-.hero-side-label{
-  position:absolute;
-  right:25px;top:50%;
-  z-index:2;
-  writing-mode:vertical-rl;
-  font:800 10px var(--ui);
-  letter-spacing:3px;
-}
-.hero-photo-caption{
-  position:absolute;
-  bottom:35px;left:35px;z-index:2;
-  color:#fff;
-  font-size:11px;
-  letter-spacing:1.2px;
-}
-.hero-index{
-  display:flex;
-  gap:35px;
-  flex-wrap:wrap;
-  margin-top:55px;
-  color:#b4a390;
-  font-size:11px;
-}
-.hero-index strong{color:var(--caramel);margin-right:8px}
-.ticker{
-  padding:18px 0;
-  overflow:hidden;
-  background:var(--caramel);
-  color:#271a11;
-}
-.ticker-track{
-  display:flex;
-  width:max-content;
-  gap:35px;
-  animation:slide 30s linear infinite;
-}
-.ticker-track span{
-  white-space:nowrap;
-  font:800 11px var(--ui);
-  letter-spacing:2px;
-}
-@keyframes slide{to{transform:translateX(-50%)}}
+    *, *::before, *::after { box-sizing: border-box; }
 
-/* INTRO */
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 88px;
+    }
 
-.intro{
-  padding:135px 0;
-  background:var(--paper);
-  color:var(--ink);
-}
-.intro-layout{
-  display:grid;
-  grid-template-columns:35% 65%;
-  align-items:start;
-  gap:30px;
-}
-.intro-label{color:#865d3e;padding-top:18px}
-.intro-statement{
-  font-size:clamp(37px,5.3vw,78px);
-  line-height:1.15;
-  letter-spacing:-2.6px;
-  font-weight:500;
-  margin:0;
-}
-.intro-statement em{color:#9b6742}
+    body {
+      margin: 0;
+      min-width: 320px;
+      overflow-x: hidden;
+      background: var(--night);
+      color: var(--cream);
+      font-family: var(--body);
+      -webkit-font-smoothing: antialiased;
+    }
 
-/* SERVICES: HORIZONTAL EDITORIAL SELECTOR */
+    body.is-locked { overflow: hidden; }
 
-.services{padding:110px 0}
-.services-heading{
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  gap:35px;
-  margin-bottom:55px;
-}
-.services-heading p{max-width:310px;color:var(--muted)}
-.service-layout{
-  display:grid;
-  grid-template-columns:1.15fr .85fr;
-  gap:50px;
-  align-items:stretch;
-}
-.service-list{border-top:1px solid var(--line)}
-.service-row{
-  display:grid;
-  grid-template-columns:50px 1fr auto;
-  align-items:center;
-  gap:15px;
-  width:100%;
-  padding:25px 10px;
-  background:none;
-  border:0;
-  border-bottom:1px solid var(--line);
-  color:var(--cream);
-  text-align:left;
-  transition:background .25s,padding .25s;
-}
-.service-row:hover,.service-row.active{
-  background:#34281d;
-  padding-left:20px;
-}
-.service-number{font:700 11px var(--ui);color:var(--caramel)}
-.service-name{font-size:clamp(18px,2.3vw,30px);font-weight:600;letter-spacing:-.8px}
-.service-price{color:var(--caramel);font-size:16px;font-weight:700}
-.service-visual{
-  min-height:480px;
-  position:relative;
-  overflow:hidden;
-  background:#3d3024;
-}
-.service-visual img{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  object-fit:cover;
-  transition:opacity .3s;
-}
-.service-visual:after{
-  content:"";
-  position:absolute;inset:0;
-  background:linear-gradient(transparent 35%,#120e0bc9);
-  pointer-events:none;
-}
-.service-overlay{
-  position:absolute;
-  z-index:2;
-  bottom:30px;left:30px;right:30px;
-}
-.service-overlay h3{font-size:29px;margin:0 0 10px}
-.service-overlay p{font-size:13px;color:#e2d7c8;line-height:1.7}
-.service-overlay .arrow-link{font-size:10px;color:var(--caramel)}
+    img { display: block; width: 100%; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
+    [hidden] { display: none !important; }
 
-/* ATMOSPHERE */
+    :focus-visible {
+      outline: 2px solid var(--bronze);
+      outline-offset: 4px;
+    }
 
-.atmosphere{
-  position:relative;
-  min-height:600px;
-  display:flex;
-  align-items:center;
-  background:#251b15;
-  overflow:hidden;
-}
-.atmosphere img{
-  position:absolute;inset:0;
-  width:100%;height:100%;object-fit:cover;
-  filter:brightness(.48) saturate(.7);
-}
-.atmosphere-content{
-  position:relative;
-  z-index:2;
-  max-width:750px;
-  text-align:center;
-  margin:auto;
-  padding:100px 0;
-}
-.atmosphere-content h2{
-  font-size:clamp(49px,8vw,112px);
-  line-height:1;
-  letter-spacing:-4px;
-  margin:22px 0;
-}
-.atmosphere-content em{color:var(--caramel)}
-.atmosphere-content p{color:#e0d2c1;max-width:490px;margin:0 auto}
+    ::selection { background: var(--bronze); color: var(--night); }
 
-/* BARBERS */
+    .wrap { width: min(1360px, 90%); margin-inline: auto; }
 
-.artists{
-  background:var(--paper);
-  color:var(--ink);
-  padding:115px 0;
-}
-.artists-heading{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:45px}
-.artists-heading .kicker{color:#9b6742}
-.artist-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.artist-card{min-width:0}
-.artist-image{
-  position:relative;
-  height:420px;
-  background:#c0aa90;
-  overflow:hidden;
-}
-.artist-image img{
-  width:100%;height:100%;
-  object-fit:cover;
-  filter:grayscale(.3);
-  transition:transform .5s;
-}
-.artist-card:hover img{transform:scale(1.06)}
-.artist-tag{
-  position:absolute;bottom:15px;left:15px;
-  background:var(--paper);
-  color:var(--ink);
-  padding:8px 12px;
-  font:800 9px var(--ui);
-  letter-spacing:1px;
-}
-.artist-card h3{font-size:25px;letter-spacing:-.7px;margin:20px 0 5px}
-.artist-card p{color:#765f4d;font-size:13px;margin:0 0 16px}
-.artist-card button{
-  background:none;border:0;border-bottom:1px solid #9b6742;
-  padding:9px 0;color:#805637;
-  font:800 10px var(--ui);letter-spacing:1px;
-}
+    .eyebrow {
+      display: block;
+      font: 800 10px var(--ui);
+      letter-spacing: 2.1px;
+      text-transform: uppercase;
+    }
 
-/* LOOKBOOK */
+    .accent { font-family: var(--accent); font-weight: 500; }
+    .bronze { color: var(--bronze); }
 
-.lookbook{padding:115px 0;overflow:hidden}
-.lookbook-top{
-  display:flex;justify-content:space-between;align-items:end;
-  gap:30px;margin-bottom:35px;
-}
-.lookbook-controls{display:flex;gap:9px}
-.circle-btn{
-  width:46px;height:46px;border-radius:50%;
-  border:1px solid #76604b;
-  background:transparent;color:var(--cream);
-  font-size:23px;
-}
-.circle-btn:hover{background:#493727}
-.lookbook-track{
-  display:flex;
-  gap:17px;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;
-  scrollbar-width:none;
-  padding-bottom:15px;
-}
-.lookbook-track::-webkit-scrollbar{display:none}
-.lookbook-item{
-  flex:0 0 clamp(260px,35vw,450px);
-  scroll-snap-align:start;
-  padding:0;
-  border:0;
-  background:none;
-  color:var(--cream);
-  text-align:left;
-}
-.lookbook-item img{
-  width:100%;
-  height:clamp(320px,40vw,500px);
-  object-fit:cover;
-  filter:saturate(.7);
-  transition:filter .3s;
-}
-.lookbook-item:hover img{filter:saturate(1)}
-.lookbook-item strong{
-  display:block;
-  margin-top:16px;
-  font-size:18px;
-  font-weight:600;
-}
-.lookbook-item span{font-size:11px;color:var(--caramel)}
-.lookbook-note{font-size:11px;color:var(--muted);margin-top:18px}
+    .section-heading {
+      margin: 18px 0 26px;
+      font-size: clamp(43px, 7vw, 95px);
+      font-weight: 600;
+      line-height: 1.02;
+      letter-spacing: -.055em;
+    }
 
-/* BOOKING */
+    .section-copy {
+      max-width: 450px;
+      font-size: 15px;
+      line-height: 1.85;
+    }
 
-.booking{
-  background:var(--paper);
-  color:var(--ink);
-  padding:120px 0;
-}
-.booking-head{max-width:750px;margin-bottom:45px}
-.booking-head .kicker{color:#956341}
-.booking-shell{
-  display:grid;
-  grid-template-columns:1.5fr .7fr;
-  gap:35px;
-  align-items:start;
-}
-.booking-workspace{
-  background:#f6efe5;
-  padding:35px;
-  border:1px solid #d7c5af;
-}
-.progress{
-  display:flex;gap:6px;
-  margin-bottom:35px;
-}
-.progress span{height:5px;flex:1;background:#d8c8b4}
-.progress span.active{background:#a66e47}
-.booking-step-title{font-size:30px;font-weight:600;letter-spacing:-1px;margin:12px 0 8px}
-.booking-help{font-size:13px;color:#776453;line-height:1.7}
-.booking-options{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:25px 0}
-.booking-option{
-  border:1px solid #d5c3ad;
-  background:#f1e6d6;
-  color:var(--ink);
-  padding:17px;
-  text-align:left;
-  border-radius:7px;
-  transition:.2s;
-}
-.booking-option:hover,.booking-option.selected{
-  background:#e3ceb4;
-  border-color:#98633f;
-}
-.booking-option strong{display:block;font-size:14px}
-.booking-option small{display:block;color:#765f4d;margin-top:6px;font-size:11px}
-.booking-date{
-  width:100%;
-  padding:15px;
-  margin-top:20px;
-  border:1px solid #cbb59b;
-  background:#fff9f0;
-  color:var(--ink);
-  border-radius:7px;
-}
-.booking-actions{display:flex;justify-content:space-between;gap:10px;margin-top:30px}
-.booking-actions button{
-  padding:13px 21px;
-  border:1px solid #a36c46;
-  background:transparent;
-  color:#704627;
-  font:800 11px var(--ui);
-  letter-spacing:1px;
-}
-.booking-actions button.next{
-  background:#9b6742;
-  color:#fff;
-}
-.booking-actions button:disabled{opacity:.35;cursor:not-allowed}
-.booking-summary{
-  background:#30251d;
-  color:var(--cream);
-  padding:30px;
-  position:sticky;top:105px;
-}
-.booking-summary h3{font-size:24px;margin:13px 0 25px}
-.summary-row{
-  display:flex;justify-content:space-between;
-  gap:14px;
-  border-bottom:1px solid var(--line);
-  padding:13px 0;
-  font-size:12px;
-}
-.summary-row span{color:#b7a592}
-.summary-row strong{text-align:right;font-weight:600}
-.summary-total{display:flex;justify-content:space-between;align-items:center;margin-top:25px}
-.summary-total strong{font-size:31px;color:var(--caramel)}
-.booking-note{font-size:11px;color:#baa58e;line-height:1.7;margin-top:25px}
-.preview-success{background:#e6d5bf;border-left:4px solid #9b6742;padding:20px;margin-top:20px;font-size:13px;line-height:1.8}
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      padding: 16px 25px;
+      border: 1px solid var(--bronze);
+      border-radius: 100px;
+      background: var(--bronze);
+      color: var(--ink);
+      font: 800 11px var(--ui);
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+      transition: transform .25s, background .25s;
+    }
 
-/* VISIT */
+    .button:hover { transform: translateY(-2px); background: #ebc293; }
+    .button:disabled { opacity: .4; cursor: not-allowed; transform: none; }
 
-.visit{padding:110px 0}
-.visit-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.visit-photo{height:470px;background:#33251c}
-.visit-photo img{width:100%;height:100%;object-fit:cover}
-.visit-info{max-width:470px}
-.visit-info p{color:#c2b19e;line-height:1.9}
-.hours{margin-top:25px;border-top:1px solid var(--line)}
-.hours div{display:flex;justify-content:space-between;gap:20px;padding:13px 0;border-bottom:1px solid var(--line);font-size:13px}
-.hours span:last-child{color:var(--caramel)}
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 35px;
+      padding: 13px 0;
+      border-bottom: 1px solid currentColor;
+      font: 800 10px var(--ui);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
 
-/* FOOTER */
+    .text-link span:last-child { font-size: 19px; }
 
-footer{background:#0f0c0a;padding:65px 0 25px}
-.footer-top{display:flex;justify-content:space-between;gap:35px;flex-wrap:wrap}
-.footer-big{font-size:clamp(45px,9vw,115px);font-weight:700;letter-spacing:-5px;line-height:1}
-.footer-big span{color:var(--caramel)}
-.footer-links{display:flex;gap:15px;flex-wrap:wrap;align-items:start}
-.footer-links a{font-size:12px;color:#c4b6a4}
-.footer-bottom{margin-top:50px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:11px}
-.footer-bottom a{color:var(--caramel)}
-.floating-book{
-  position:fixed;
-  bottom:20px;right:20px;
-  z-index:90;
-  box-shadow:0 12px 35px #0007;
-}
-.lightbox{
-  display:none;position:fixed;inset:0;
-  z-index:200;background:#0c0908f5;
-  padding:55px 20px;
-  align-items:center;justify-content:center;
-  flex-direction:column;
-}
-.lightbox.open{display:flex}
-.lightbox img{max-height:75vh;max-width:100%;object-fit:contain}
-.lightbox button{position:absolute;top:20px;right:25px;border:0;background:none;color:white;font-size:35px}
-.lightbox p{color:var(--caramel)}
-.reveal{opacity:1;transform:none}
-.motion .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s}
-.motion .reveal.visible{opacity:1;transform:none}
+    .demo-notice {
+      padding: 10px 14px;
+      background: #3d2a1c;
+      color: #f4d8b6;
+      text-align: center;
+      font: 700 10px var(--ui);
+      letter-spacing: .3px;
+    }
 
-@media(max-width:950px){
-  .hero{grid-template-columns:1fr}
-  .hero-left{padding:75px 5%;order:2}
-  .hero-photo{min-height:430px;order:1}
-  .hero h1{font-size:clamp(68px,13vw,120px)}
-  .intro-layout{grid-template-columns:1fr}
-  .service-layout{grid-template-columns:1fr}
-  .service-visual{min-height:390px}
-  .booking-shell{grid-template-columns:1fr}
-  .booking-summary{position:static}
-}
-@media(max-width:650px){
-  .header-book{display:none}
-  .hero-photo{min-height:360px}
-  .hero-left{padding:65px 5%}
-  .hero h1{font-size:clamp(62px,15vw,94px);letter-spacing:-4px}
-  .hero-index{gap:16px}
-  .intro{padding:85px 0}
-  .intro-statement{font-size:clamp(38px,9vw,55px)}
-  .services,.artists,.lookbook,.booking,.visit{padding:80px 0}
-  .services-heading,.artists-heading,.lookbook-top{align-items:start;flex-direction:column}
-  .section-title{letter-spacing:-2px}
-  .service-row{grid-template-columns:28px 1fr auto;padding:21px 4px;gap:9px}
-  .service-name{font-size:19px}
-  .service-price{font-size:13px}
-  .service-visual{min-height:350px}
-  .atmosphere{min-height:490px}
-  .artist-grid{grid-template-columns:1fr}
-  .artist-image{height:390px}
-  .lookbook-item{flex-basis:78vw}
-  .booking-workspace,.booking-summary{padding:23px}
-  .booking-options{grid-template-columns:1fr}
-  .visit-layout{grid-template-columns:1fr}
-  .visit-photo{height:330px}
-  .footer-big{letter-spacing:-3px}
-  .floating-book{bottom:12px;right:12px;padding:13px 16px;font-size:10px}
-}
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,*:before,*:after{animation:none!important;transition:none!important}
-  .motion .reveal{opacity:1;transform:none}
-}
-</style>
+    /* Header and full-screen navigation */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(24,19,15,.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+    }
+
+    .header-inner {
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .wordmark {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      white-space: nowrap;
+    }
+
+    .wordmark b { color: var(--bronze); }
+    .wordmark small {
+      display: block;
+      margin-top: 4px;
+      color: var(--quiet);
+      font: 700 8px var(--ui);
+      letter-spacing: 2.2px;
+    }
+
+    .header-actions { display: flex; align-items: center; gap: 28px; }
+    .header-book {
+      color: var(--bronze);
+      font: 800 10px var(--ui);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .menu-button {
+      display: grid;
+      place-content: center;
+      gap: 6px;
+      width: 47px;
+      height: 47px;
+      border: 1px solid #79634e;
+      border-radius: 50%;
+      background: transparent;
+    }
+
+    .menu-button i {
+      width: 19px;
+      height: 2px;
+      background: var(--cream);
+      transition: transform .25s;
+    }
+
+    .menu-button[aria-expanded="true"] i:first-child {
+      transform: translateY(4px) rotate(45deg);
+    }
+
+    .menu-button[aria-expanded="true"] i:last-child {
+      transform: translateY(-4px) rotate(-45deg);
+    }
+
+    .site-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 95;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      overflow-y: auto;
+      padding: 120px 6% 45px;
+      background: #211911;
+    }
+
+    .site-menu.is-open { display: flex; }
+    .site-menu a {
+      width: fit-content;
+      font-size: clamp(38px, 8vw, 90px);
+      font-weight: 600;
+      letter-spacing: -.055em;
+      line-height: 1.12;
+      transition: color .2s;
+    }
+
+    .site-menu a:hover { color: var(--bronze); }
+    .site-menu p { color: var(--quiet); font-size: 12px; margin-top: 25px; }
+
+    /* Hero */
+
+    .hero {
+      display: grid;
+      grid-template-columns: 52% 48%;
+      min-height: 730px;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 75px max(5vw, 28px);
+    }
+
+    .hero-copy .eyebrow { color: var(--bronze); }
+
+    .hero h1 {
+      margin: 32px 0;
+      font-size: clamp(65px, 9vw, 145px);
+      font-weight: 600;
+      letter-spacing: -.07em;
+      line-height: .93;
+    }
+
+    .hero h1 em {
+      display: block;
+      color: var(--bronze);
+      font-size: .85em;
+      letter-spacing: -.055em;
+    }
+
+    .hero-copy > p {
+      max-width: 420px;
+      color: #cbbba8;
+      line-height: 1.9;
+      font-size: 15px;
+    }
+
+    .hero-actions { margin-top: 25px; }
+    .hero-foot {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 60px;
+      color: var(--quiet);
+      font-size: 10px;
+      letter-spacing: .5px;
+    }
+
+    .hero-foot b { color: var(--bronze); margin-right: 7px; }
+
+    .hero-image { position: relative; min-height: 620px; overflow: hidden; }
+    .hero-image img { height: 100%; object-fit: cover; }
+
+    .hero-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, #17110d9e, transparent 48%);
+      pointer-events: none;
+    }
+
+    .hero-image-label {
+      position: absolute;
+      z-index: 1;
+      bottom: 30px;
+      left: 30px;
+      font: 700 11px var(--ui);
+      letter-spacing: 1.4px;
+    }
+
+    .marquee {
+      overflow: hidden;
+      padding: 19px 0;
+      background: var(--bronze);
+      color: #281b11;
+    }
+
+    .marquee-inner {
+      display: flex;
+      gap: 38px;
+      width: max-content;
+      animation: marquee 30s linear infinite;
+    }
+
+    .marquee span {
+      white-space: nowrap;
+      font: 800 11px var(--ui);
+      letter-spacing: 2px;
+    }
+
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    /* Introduction */
+
+    .introduction {
+      padding: 130px 0;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .introduction-grid {
+      display: grid;
+      grid-template-columns: 32% 1fr;
+      gap: 35px;
+    }
+
+    .introduction .eyebrow { padding-top: 15px; color: var(--bronze-deep); }
+
+    .introduction p {
+      margin: 0;
+      font-size: clamp(38px, 5.4vw, 77px);
+      font-weight: 500;
+      letter-spacing: -.045em;
+      line-height: 1.15;
+    }
+
+    .introduction em { color: var(--bronze-deep); }
+
+    /* Services */
+
+    .services { padding: 115px 0; }
+    .split-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 35px;
+      margin-bottom: 50px;
+    }
+
+    .split-heading .section-copy { max-width: 320px; color: var(--quiet); }
+
+    .service-layout {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 50px;
+    }
+
+    .service-list { border-top: 1px solid var(--line); }
+
+    .service-item {
+      display: grid;
+      grid-template-columns: 38px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      width: 100%;
+      padding: 25px 12px;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      background: transparent;
+      color: var(--cream);
+      text-align: left;
+      transition: background .25s, padding .25s;
+    }
+
+    .service-item:hover, .service-item.is-active {
+      padding-left: 20px;
+      background: #35291e;
+    }
+
+    .service-item .number { color: var(--bronze); font-size: 11px; }
+    .service-item .name { font-size: clamp(18px, 2.2vw, 29px); font-weight: 600; }
+    .service-item .price { color: var(--bronze); font-size: 16px; font-weight: 700; }
+
+    .service-feature {
+      position: relative;
+      min-height: 490px;
+      overflow: hidden;
+      background: var(--night-raised);
+    }
+
+    .service-feature img { height: 100%; object-fit: cover; }
+    .service-feature::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent 30%, #110d0bdc);
+      pointer-events: none;
+    }
+
+    .service-feature-copy {
+      position: absolute;
+      z-index: 1;
+      left: 30px;
+      right: 30px;
+      bottom: 30px;
+    }
+
+    .service-feature-copy h3 { margin: 12px 0; font-size: 30px; }
+    .service-feature-copy p { max-width: 390px; font-size: 13px; line-height: 1.75; }
+
+    /* The house experience */
+
+    .house-experience {
+      padding: 115px 0;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .house-experience .eyebrow { color: var(--bronze-deep); }
+
+    .experience-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      gap: 45px;
+      margin-bottom: 55px;
+    }
+
+    .experience-intro .section-copy { color: #715d4b; }
+
+    .experience-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 20px;
+    }
+
+    .experience-large { position: relative; min-height: 600px; overflow: hidden; }
+    .experience-large img { height: 100%; object-fit: cover; }
+
+    .experience-large::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent 35%, #130f0bce);
+    }
+
+    .experience-caption {
+      position: absolute;
+      z-index: 1;
+      left: 35px;
+      bottom: 35px;
+      max-width: 440px;
+      color: var(--cream);
+    }
+
+    .experience-caption h3 {
+      font-size: clamp(31px, 4vw, 56px);
+      letter-spacing: -.045em;
+      line-height: 1.1;
+      margin: 14px 0;
+    }
+
+    .experience-caption p { font-size: 14px; line-height: 1.8; }
+
+    .experience-side { display: grid; grid-template-rows: 1fr auto; gap: 20px; }
+
+    .experience-side img {
+      height: 310px;
+      object-fit: cover;
+    }
+
+    .experience-note {
+      padding: 35px;
+      background: #d9c5ad;
+    }
+
+    .experience-note h3 {
+      margin: 0 0 12px;
+      font-size: 29px;
+      letter-spacing: -.8px;
+    }
+
+    .experience-note p { margin: 0; line-height: 1.8; color: #66513f; }
+
+    .experience-details {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .experience-detail {
+      padding: 24px 0;
+      border-top: 1px solid #bfa88d;
+    }
+
+    .experience-detail b {
+      color: var(--bronze-deep);
+      font: 800 11px var(--ui);
+    }
+
+    .experience-detail h4 { margin: 14px 0 8px; font-size: 21px; }
+    .experience-detail p { margin: 0; font-size: 13px; line-height: 1.8; color: #715d4b; }
+
+    /* Artists */
+
+    .artists { padding: 115px 0; }
+    .artist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+    .artist-photo { height: 425px; overflow: hidden; background: #3d3025; }
+    .artist-photo img { height: 100%; object-fit: cover; transition: transform .5s; }
+    .artist-card:hover img { transform: scale(1.04); }
+
+    .artist-card h3 { margin: 20px 0 6px; font-size: 26px; letter-spacing: -.7px; }
+    .artist-card p { color: var(--quiet); font-size: 13px; line-height: 1.7; }
+
+    .artist-card button {
+      padding: 10px 0;
+      border: 0;
+      border-bottom: 1px solid var(--bronze);
+      background: transparent;
+      color: var(--bronze);
+      font: 800 10px var(--ui);
+      letter-spacing: 1px;
+    }
+
+    /* Before / after */
+
+    .transformation {
+      padding: 115px 0;
+      background: #30241b;
+    }
+
+    .transformation-intro { max-width: 830px; margin-bottom: 45px; }
+    .transformation-intro .section-copy { color: #cbb9a6; }
+
+    .comparison {
+      position: relative;
+      width: min(100%, 900px);
+      aspect-ratio: 1.55;
+      overflow: hidden;
+      margin: auto;
+      background: #1b1511;
+      --split: 50%;
+      touch-action: pan-y;
+      user-select: none;
+    }
+
+    .comparison img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .comparison .before-photo { clip-path: inset(0 calc(100% - var(--split)) 0 0); }
+
+    .comparison .divider-line {
+      position: absolute;
+      z-index: 3;
+      left: var(--split);
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #fff;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .comparison .handle {
+      position: absolute;
+      z-index: 4;
+      top: 50%;
+      left: var(--split);
+      display: grid;
+      place-items: center;
+      width: 57px;
+      height: 57px;
+      border: 2px solid white;
+      border-radius: 50%;
+      background: var(--bronze);
+      color: #25180e;
+      font-size: 21px;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      box-shadow: 0 5px 30px #0008;
+    }
+
+    .comparison .photo-label {
+      position: absolute;
+      z-index: 2;
+      top: 20px;
+      padding: 10px 15px;
+      background: #18130fc9;
+      color: white;
+      font: 800 10px var(--ui);
+      letter-spacing: 1.5px;
+    }
+
+    .photo-label.left { left: 20px; }
+    .photo-label.right { right: 20px; }
+
+    .comparison input {
+      position: absolute;
+      z-index: 5;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      opacity: 0;
+      cursor: ew-resize;
+    }
+
+    .comparison input:focus-visible { outline: 3px solid var(--bronze); outline-offset: -4px; }
+
+    .comparison-note {
+      max-width: 900px;
+      margin: 20px auto 0;
+      color: var(--quiet);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    /* Lookbook */
+
+    .lookbook { padding: 115px 0; overflow: hidden; }
+
+    .lookbook-controls { display: flex; gap: 10px; }
+    .round-button {
+      width: 47px;
+      height: 47px;
+      border: 1px solid #79634e;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--cream);
+      font-size: 22px;
+    }
+
+    .round-button:hover { background: var(--night-raised); }
+
+    .lookbook-track {
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      padding-bottom: 10px;
+    }
+
+    .lookbook-track::-webkit-scrollbar { display: none; }
+
+    .lookbook-item {
+      flex: 0 0 clamp(260px, 35vw, 450px);
+      scroll-snap-align: start;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--cream);
+      text-align: left;
+    }
+
+    .lookbook-item img { height: clamp(330px, 40vw, 510px); object-fit: cover; }
+    .lookbook-item strong { display: block; margin-top: 16px; font-size: 18px; }
+    .lookbook-item small { color: var(--bronze); font-size: 11px; }
+
+    /* Booking */
+
+    .booking {
+      padding: 115px 0;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .booking .eyebrow { color: var(--bronze-deep); }
+
+    .booking-grid {
+      display: grid;
+      grid-template-columns: 1.5fr .7fr;
+      gap: 30px;
+      align-items: start;
+      margin-top: 45px;
+    }
+
+    .booking-panel {
+      padding: 35px;
+      border: 1px solid #d4c0a8;
+      background: var(--paper-light);
+    }
+
+    .booking-progress { display: flex; gap: 6px; margin-bottom: 32px; }
+    .booking-progress i { flex: 1; height: 5px; background: #d9c8b4; }
+    .booking-progress i.is-active { background: var(--bronze-deep); }
+
+    .booking-panel h3 { font-size: 30px; letter-spacing: -1px; margin: 12px 0; }
+    .booking-panel p { font-size: 13px; line-height: 1.8; color: #75604e; }
+
+    .booking-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .booking-choice {
+      padding: 18px;
+      border: 1px solid #d4bea5;
+      border-radius: 6px;
+      background: #f1e6d6;
+      color: var(--ink);
+      text-align: left;
+    }
+
+    .booking-choice.is-selected, .booking-choice:hover {
+      border-color: var(--bronze-deep);
+      background: #e6d1b7;
+    }
+
+    .booking-choice strong { display: block; font-size: 14px; }
+    .booking-choice small { display: block; margin-top: 6px; color: #765f4d; font-size: 11px; }
+
+    .calendar {
+      margin-top: 25px;
+      border: 1px solid #d8c6b0;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff9f1;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      padding: 18px;
+      border-bottom: 1px solid #e4d5c2;
+    }
+
+    .calendar-header strong { font-size: 17px; }
+    .calendar-nav { display: flex; gap: 7px; }
+
+    .calendar-nav button {
+      width: 35px;
+      height: 35px;
+      border: 1px solid #d1baa0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--ink);
+    }
+
+    .calendar-nav button:disabled { opacity: .3; cursor: not-allowed; }
+
+    .calendar-weekdays, .calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 5px;
+      padding: 10px;
+    }
+
+    .calendar-weekdays { padding-bottom: 0; }
+    .calendar-weekdays span {
+      padding: 8px 0;
+      color: #8a735e;
+      text-align: center;
+      font: 800 10px var(--ui);
+    }
+
+    .calendar-days button, .calendar-empty {
+      display: grid;
+      place-items: center;
+      min-height: 44px;
+      border: 0;
+      border-radius: 5px;
+      background: transparent;
+      color: var(--ink);
+      font-size: 13px;
+    }
+
+    .calendar-days button:not(:disabled):hover { background: #ead9c4; }
+    .calendar-days button.is-selected { background: var(--bronze-deep); color: white; }
+    .calendar-days button:disabled { color: #c7b8a8; cursor: not-allowed; }
+
+    .booking-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .booking-actions button {
+      padding: 14px 19px;
+      border: 1px solid var(--bronze-deep);
+      background: transparent;
+      color: var(--bronze-deep);
+      font: 800 10px var(--ui);
+      letter-spacing: 1px;
+    }
+
+    .booking-actions .next { background: var(--bronze-deep); color: white; }
+    .booking-actions button:disabled { opacity: .35; cursor: not-allowed; }
+
+    .booking-summary {
+      position: sticky;
+      top: 105px;
+      padding: 30px;
+      background: var(--night-raised);
+      color: var(--cream);
+    }
+
+    .booking-summary h3 { margin: 14px 0 22px; font-size: 25px; }
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 12px;
+    }
+
+    .summary-line span { color: var(--quiet); }
+    .summary-line strong { text-align: right; font-weight: 600; }
+    .summary-total { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; }
+    .summary-total strong { color: var(--bronze); font-size: 29px; }
+    .summary-disclaimer { margin-top: 25px; color: var(--quiet); font-size: 11px; line-height: 1.8; }
+
+    .booking-result {
+      margin-top: 25px;
+      padding: 22px;
+      border-left: 4px solid var(--bronze-deep);
+      background: #e8d5bd;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    /* Visit and footer */
+
+    .visit { padding: 115px 0; }
+    .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 65px; align-items: center; }
+    .visit-photo { height: 480px; }
+    .visit-photo img { height: 100%; object-fit: cover; }
+    .visit-copy p { color: #c9b8a4; line-height: 1.85; }
+
+    .hours { margin: 25px 0; border-top: 1px solid var(--line); }
+    .hours div {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+    .hours div span:last-child { color: var(--bronze); }
+
+    .footer { padding: 65px 0 25px; background: #100d0a; }
+    .footer-top { display: flex; justify-content: space-between; gap: 35px; flex-wrap: wrap; }
+    .footer-wordmark { font-size: clamp(45px, 9vw, 115px); font-weight: 700; letter-spacing: -.065em; line-height: 1; }
+    .footer-wordmark b { color: var(--bronze); }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; align-items: start; }
+    .footer-links a { color: #cdbda9; font-size: 12px; }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 55px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--quiet);
+      font-size: 11px;
+    }
+    .footer-bottom a { color: var(--bronze); }
+
+    .floating-book {
+      position: fixed;
+      z-index: 80;
+      right: 20px;
+      bottom: 20px;
+      box-shadow: 0 10px 35px #0008;
+    }
+
+    .lightbox {
+      position: fixed;
+      z-index: 200;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      padding: 55px 20px;
+      background: #0d0a08f5;
+    }
+
+    .lightbox.is-open { display: flex; }
+    .lightbox img { width: auto; max-width: 100%; max-height: 75vh; object-fit: contain; }
+    .lightbox p { color: var(--bronze); }
+    .lightbox-close {
+      position: absolute;
+      right: 25px;
+      top: 15px;
+      border: 0;
+      background: transparent;
+      color: white;
+      font-size: 38px;
+    }
+
+    .reveal { opacity: 1; transform: none; }
+    .has-motion .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .7s, transform .7s;
+    }
+    .has-motion .reveal.is-visible { opacity: 1; transform: none; }
+
+    @media (max-width: 950px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-image { order: -1; min-height: 430px; }
+      .hero-copy { padding: 70px 5%; }
+      .service-layout, .booking-grid { grid-template-columns: 1fr; }
+      .service-feature { min-height: 420px; }
+      .booking-summary { position: static; }
+      .introduction-grid { grid-template-columns: 1fr; }
+      .experience-grid { grid-template-columns: 1fr; }
+      .experience-large { min-height: 490px; }
+      .experience-side { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .experience-side img { height: 100%; min-height: 260px; }
+    }
+
+    @media (max-width: 650px) {
+      .header-book { display: none; }
+      .hero-image { min-height: 360px; }
+      .hero h1 { font-size: clamp(63px, 15vw, 95px); }
+      .hero-foot { margin-top: 42px; }
+      .introduction, .services, .house-experience,
+      .artists, .transformation, .lookbook,
+      .booking, .visit { padding: 80px 0; }
+      .split-heading, .experience-intro { display: block; }
+      .section-heading { letter-spacing: -.045em; }
+      .service-item { grid-template-columns: 25px 1fr auto; gap: 8px; padding: 22px 5px; }
+      .service-item .name { font-size: 18px; }
+      .service-item .price { font-size: 13px; }
+      .service-feature { min-height: 370px; }
+      .experience-large { min-height: 450px; }
+      .experience-side { grid-template-columns: 1fr; }
+      .experience-side img { height: 260px; }
+      .experience-details, .artist-grid { grid-template-columns: 1fr; }
+      .artist-photo { height: 390px; }
+      .comparison { aspect-ratio: 1 / 1.1; }
+      .comparison .handle { width: 49px; height: 49px; }
+      .lookbook-item { flex-basis: 78vw; }
+      .booking-panel, .booking-summary { padding: 22px; }
+      .booking-options { grid-template-columns: 1fr; }
+      .calendar-days button, .calendar-empty { min-height: 40px; }
+      .visit-grid { grid-template-columns: 1fr; gap: 35px; }
+      .visit-photo { height: 330px; }
+      .floating-book { right: 12px; bottom: 12px; padding: 13px 17px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .has-motion .reveal { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
 
 <body>
-<div class="demo-banner">
-  SYNTAX LABS PORTFOLIO CONCEPT — FICTIONAL BUSINESS • DEMO BOOKINGS ONLY
-</div>
+  <div class="demo-notice">
+    SYNTAX LABS PORTFOLIO CONCEPT — FICTIONAL BUSINESS • DEMO BOOKINGS ONLY
+  </div>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="#home">
-      NOIR <span>&</span> BLADE
-      <small>THE GROOMING HOUSE</small>
-    </a>
-    <div class="header-right">
-      <a class="header-book" href="#booking">Reserve a Chair ↗</a>
-      <button class="menu-toggle" id="menuToggle" type="button"
-              aria-label="Open navigation" aria-expanded="false"
-              aria-controls="fullMenu">
-        <span></span><span></span>
-      </button>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="#home" class="wordmark">
+        NOIR <b>&</b> BLADE
+        <small>THE GROOMING HOUSE</small>
+      </a>
+
+      <div class="header-actions">
+        <a href="#booking" class="header-book">Reserve a Chair ↗</a>
+        <button class="menu-button" id="menuButton" type="button"
+                aria-label="Open navigation" aria-expanded="false"
+                aria-controls="siteMenu">
+          <i></i><i></i>
+        </button>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<nav class="full-menu" id="fullMenu" aria-label="Main navigation" inert>
-  <a href="#home">Home</a>
-  <a href="#services">The Services</a>
-  <a href="#artists">Our Barbers</a>
-  <a href="#lookbook">The Lookbook</a>
-  <a href="#booking">Book a Chair</a>
-  <a href="#visit">The House</a>
-  <div class="menu-footer">GOOD CUTS. GOOD CONVERSATION. GREAT COMPANY.</div>
-</nav>
+  <nav class="site-menu" id="siteMenu" aria-label="Main navigation" inert>
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#experience">The Experience</a>
+    <a href="#artists">Our Barbers</a>
+    <a href="#transformation">The Transformation</a>
+    <a href="#lookbook">Lookbook</a>
+    <a href="#booking">Book a Chair</a>
+    <p>GOOD CUTS. GOOD PEOPLE. GREAT CONVERSATION.</p>
+  </nav>
 
-<main>
-<section class="hero" id="home">
-  <div class="hero-left">
-    <div class="kicker hero-kicker">WELCOME TO THE GROOMING HOUSE / EST. IN STYLE</div>
-    <h1>
-      A BETTER<br>
-      <span class="italic">Cut.</span>
-      A BETTER<br>
-      FEELING.
-    </h1>
-    <p class="hero-description">
-      Good cuts. Good conversation. A place to unwind,
-      feel at home, and leave looking your best.
-      Welcome to a different kind of barber experience.
-    </p>
-    <div>
-      <a class="pill" href="#booking">Find Your Chair ↗</a>
-    </div>
-    <div class="hero-index">
-      <div><strong>01</strong> GREAT SERVICE</div>
-      <div><strong>02</strong> REAL CRAFT</div>
-      <div><strong>03</strong> GOOD COMPANY</div>
-    </div>
-  </div>
-  <div class="hero-photo">
-    <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1300&q=85"
-         alt="Warm atmospheric barbershop interior"
-         fetchpriority="high">
-    <div class="hero-side-label">NOIR & BLADE — THE HOUSE</div>
-    <div class="hero-photo-caption">PULL UP A CHAIR. YOU'RE HOME.</div>
-  </div>
-</section>
-
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-track">
-    <span>✦ GOOD CUTS</span><span>✦ GOOD PEOPLE</span>
-    <span>✦ GREAT CONVERSATION</span><span>✦ THE PERFECT FADE</span>
-    <span>✦ GOOD CUTS</span><span>✦ GOOD PEOPLE</span>
-    <span>✦ GREAT CONVERSATION</span><span>✦ THE PERFECT FADE</span>
-  </div>
-</div>
-
-<section class="intro">
-  <div class="container intro-layout">
-    <div class="kicker intro-label">MORE THAN A BARBERSHOP — 001</div>
-    <p class="intro-statement reveal">
-      A place where you can
-      <em class="italic">slow down,</em>
-      enjoy the moment, and walk out feeling
-      <em class="italic">like yourself again.</em>
-    </p>
-  </div>
-</section>
-
-
-<!-- SERVICES -->
-
-<section class="services" id="services">
-  <div class="container">
-    <div class="services-heading reveal">
-      <div>
-        <div class="kicker" style="color:var(--caramel)">
-          002 / THE MENU
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy">
+        <span class="eyebrow">Welcome to the Grooming House</span>
+        <h1>
+          A BETTER<br>
+          <em class="accent">Cut.</em>
+          A BETTER<br>
+          FEELING.
+        </h1>
+        <p>
+          Good cuts. Good conversation. A place to unwind,
+          feel at home, and leave looking your best.
+          Welcome to a different kind of barber experience.
+        </p>
+        <div class="hero-actions">
+          <a href="#booking" class="button">Find Your Chair ↗</a>
         </div>
-        <h2 class="section-title">
-          THE GOOD<br>
-          <span class="italic" style="color:var(--caramel)">
-            Stuff.
-          </span>
-        </h2>
+        <div class="hero-foot">
+          <span><b>01</b> REAL CRAFT</span>
+          <span><b>02</b> GOOD COMPANY</span>
+          <span><b>03</b> YOUR STYLE</span>
+        </div>
       </div>
-      <p class="copy">
-        From a fresh fade to a complete reset,
-        there's something here for every style.
-        Take your time. We'll handle the details.
-      </p>
+
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=85"
+             alt="Warm, welcoming barbershop interior" fetchpriority="high">
+        <div class="hero-image-label">PULL UP A CHAIR. YOU'RE HOME.</div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-inner">
+        <span>✦ GOOD CUTS</span><span>✦ GOOD PEOPLE</span>
+        <span>✦ GREAT CONVERSATION</span><span>✦ THE PERFECT FADE</span>
+        <span>✦ GOOD CUTS</span><span>✦ GOOD PEOPLE</span>
+        <span>✦ GREAT CONVERSATION</span><span>✦ THE PERFECT FADE</span>
+      </div>
     </div>
 
-    <div class="service-layout">
-      <div class="service-list reveal" id="serviceList">
-        <!-- Services generated by JavaScript -->
+    <section class="introduction">
+      <div class="wrap introduction-grid">
+        <span class="eyebrow">More Than a Barbershop / 001</span>
+        <p class="reveal">
+          A place where you can
+          <em class="accent">slow down,</em>
+          enjoy the moment, and walk out feeling
+          <em class="accent">like yourself again.</em>
+        </p>
       </div>
+    </section>
 
-      <div class="service-visual reveal">
-        <img id="serviceImage"
-             src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1000&q=85"
-             alt="Professional barber at work"
-             loading="lazy">
-
-        <div class="service-overlay">
-          <div class="kicker" style="color:var(--caramel)">
-            YOUR NEXT GREAT CUT
+    <section class="services" id="services">
+      <div class="wrap">
+        <div class="split-heading reveal">
+          <div>
+            <span class="eyebrow bronze">002 / The Menu</span>
+            <h2 class="section-heading">
+              THE GOOD<br><em class="accent bronze">Stuff.</em>
+            </h2>
           </div>
-          <h3 id="serviceVisualName">The House Cut</h3>
-          <p id="serviceVisualDescription">
-            A tailored cut, clean finish,
-            and the confidence to match.
+          <p class="section-copy">
+            From a fresh fade to a complete reset,
+            there's something here for every style.
+            Take your time. We'll handle the details.
           </p>
-          <a class="arrow-link" id="serviceBookLink"
-             href="#booking">
-            <span>CHOOSE THIS SERVICE</span>
-            <span>↗</span>
+        </div>
+
+        <div class="service-layout">
+          <div class="service-list" id="serviceList"></div>
+          <div class="service-feature">
+            <img id="servicePhoto" src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1000&q=85"
+                 alt="Barber working on a haircut" loading="lazy">
+            <div class="service-feature-copy">
+              <span class="eyebrow bronze">Your Next Great Cut</span>
+              <h3 id="serviceTitle">The House Cut</h3>
+              <p id="serviceDescription">A tailored haircut with a clean finish.</p>
+              <a href="#booking" class="text-link" id="serviceBooking">
+                <span>Choose This Service</span><span>↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="house-experience" id="experience">
+      <div class="wrap">
+        <div class="experience-intro reveal">
+          <div>
+            <span class="eyebrow">003 / The House Experience</span>
+            <h2 class="section-heading">
+              STAY A<br><em class="accent">While.</em>
+            </h2>
+          </div>
+          <p class="section-copy">
+            The best part of a barbershop isn't just the haircut.
+            It's the atmosphere, the familiar faces, the music,
+            and having a place where you can just be yourself.
+          </p>
+        </div>
+
+        <div class="experience-grid">
+          <div class="experience-large reveal">
+            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=85"
+                 alt="Classic barber chairs in a welcoming grooming space" loading="lazy">
+            <div class="experience-caption">
+              <span class="eyebrow bronze">Make Yourself Comfortable</span>
+              <h3>More than a cut.<br>A little time for you.</h3>
+              <p>Come in, settle down, and enjoy the experience.</p>
+            </div>
+          </div>
+
+          <div class="experience-side">
+            <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=900&q=85"
+                 alt="Traditional barbering craftsmanship" loading="lazy">
+            <div class="experience-note">
+              <h3>Good company.<br>Great atmosphere.</h3>
+              <p>
+                A little conversation, a little music,
+                and the kind of service that makes
+                you look forward to coming back.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="experience-details">
+          <div class="experience-detail">
+            <b>01 / THE WELCOME</b>
+            <h4>Feel right at home.</h4>
+            <p>A relaxed atmosphere from the moment you walk in.</p>
+          </div>
+          <div class="experience-detail">
+            <b>02 / THE CRAFT</b>
+            <h4>Every detail counts.</h4>
+            <p>Thoughtful grooming with care and attention.</p>
+          </div>
+          <div class="experience-detail">
+            <b>03 / THE FEELING</b>
+            <h4>Leave feeling fresh.</h4>
+            <p>More confidence, a great cut, and a better day.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="artists" id="artists">
+      <div class="wrap">
+        <div class="split-heading reveal">
+          <div>
+            <span class="eyebrow bronze">004 / The People</span>
+            <h2 class="section-heading">
+              GOOD HANDS.<br>
+              <em class="accent bronze">Good Company.</em>
+            </h2>
+          </div>
+          <p class="section-copy">
+            Every great barbershop has its personalities.
+            Meet the fictional artists behind our grooming house.
+          </p>
+        </div>
+        <div class="artist-grid" id="artistGrid"></div>
+      </div>
+    </section>
+
+    <section class="transformation" id="transformation">
+      <div class="wrap">
+        <div class="transformation-intro reveal">
+          <span class="eyebrow bronze">005 / The Transformation</span>
+          <h2 class="section-heading">
+            SEE THE<br><em class="accent bronze">Difference.</em>
+          </h2>
+          <p class="section-copy">
+            A fresh cut changes how you carry yourself.
+            Drag the slider to explore this interactive
+            grooming inspiration comparison.
+          </p>
+        </div>
+
+        <div class="comparison" id="comparison">
+          <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=85"
+               alt="Illustrative barbershop scene used as the after image" loading="lazy">
+          <img class="before-photo"
+               src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1200&q=85"
+               alt="Different illustrative barbershop scene used as the before image" loading="lazy">
+          <span class="photo-label left">BEFORE</span>
+          <span class="photo-label right">AFTER</span>
+          <div class="divider-line"></div>
+          <div class="handle" aria-hidden="true">↔</div>
+          <input id="comparisonRange" type="range" min="0" max="100" value="50"
+                 aria-label="Move slider to compare the two illustrative photographs">
+        </div>
+        <p class="comparison-note">
+          Interactive concept demonstration. These are separate illustrative
+          photographs, not a documented before-and-after result from one client.
+        </p>
+      </div>
+    </section>
+
+    <section class="lookbook" id="lookbook">
+      <div class="wrap">
+        <div class="split-heading reveal">
+          <div>
+            <span class="eyebrow bronze">006 / The Lookbook</span>
+            <h2 class="section-heading">
+              FIND YOUR<br><em class="accent bronze">Look.</em>
+            </h2>
+          </div>
+          <div class="lookbook-controls">
+            <button class="round-button" id="lookPrev" type="button" aria-label="Previous photo">←</button>
+            <button class="round-button" id="lookNext" type="button" aria-label="Next photo">→</button>
+          </div>
+        </div>
+        <div class="lookbook-track" id="lookbookTrack"></div>
+        <p style="color:var(--quiet);font-size:12px">
+          Swipe to explore. Tap any image for a closer look.
+          Photographs are illustrative.
+        </p>
+      </div>
+    </section>
+
+    <section class="booking" id="booking">
+      <div class="wrap">
+        <span class="eyebrow">007 / Your Experience</span>
+        <h2 class="section-heading">
+          YOUR CHAIR<br><em class="accent">Is Waiting.</em>
+        </h2>
+        <p class="section-copy" style="color:#715d4b">
+          Try our custom booking experience. Select your service,
+          barber, preferred date, and sample time slot.
+          No actual appointments are created.
+        </p>
+
+        <div class="booking-grid">
+          <div class="booking-panel">
+            <div class="booking-progress" id="bookingProgress">
+              <i class="is-active"></i><i></i><i></i><i></i>
+            </div>
+            <div id="bookingContent" aria-live="polite"></div>
+            <div class="booking-actions">
+              <button id="bookingBack" type="button">← BACK</button>
+              <button id="bookingNext" class="next" type="button">CONTINUE →</button>
+            </div>
+          </div>
+
+          <aside class="booking-summary">
+            <span class="eyebrow bronze">Your Appointment</span>
+            <h3>The Details</h3>
+            <div class="summary-line"><span>Service</span><strong id="summaryService">Not selected</strong></div>
+            <div class="summary-line"><span>Barber</span><strong id="summaryBarber">Not selected</strong></div>
+            <div class="summary-line"><span>Date</span><strong id="summaryDate">Not selected</strong></div>
+            <div class="summary-line"><span>Time</span><strong id="summaryTime">Not selected</strong></div>
+            <div class="summary-line"><span>Duration</span><strong id="summaryDuration">—</strong></div>
+            <div class="summary-total"><span>Estimated Total</span><strong id="summaryTotal">$0.00</strong></div>
+            <p class="summary-disclaimer">
+              DEMONSTRATION ONLY. Availability is simulated.
+              No booking is saved, no payment is collected,
+              and no personal information is requested.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="visit" id="visit">
+      <div class="wrap visit-grid">
+        <div class="visit-photo">
+          <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=1100&q=85"
+               alt="Barber carefully grooming a client" loading="lazy">
+        </div>
+        <div class="visit-copy">
+          <span class="eyebrow bronze">008 / The House</span>
+          <h2 class="section-heading">
+            ALWAYS A<br><em class="accent bronze">Good Time.</em>
+          </h2>
+          <p>
+            The best barbershops feel like a second home.
+            A familiar face, a welcoming atmosphere,
+            and a fresh cut that makes your day.
+          </p>
+          <div class="hours">
+            <div><span>Monday – Friday</span><span>9 AM – 7 PM</span></div>
+            <div><span>Saturday</span><span>10 AM – 6 PM</span></div>
+            <div><span>Sunday</span><span>Closed</span></div>
+          </div>
+          <p style="font-size:12px">
+            Sample business hours only. NOIR & BLADE is fictional
+            and has no physical storefront.
+          </p>
+          <a class="text-link" href="https://syntax-labs-website.pages.dev/"
+             target="_blank" rel="noopener noreferrer">
+            <span>Explore Syntax Labs</span><span>↗</span>
           </a>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
+  </main>
 
-<!-- ATMOSPHERE -->
-
-<section class="atmosphere" id="experience">
-  <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1800&q=85"
-       alt="The craftsmanship of professional barbering"
-       loading="lazy">
-
-  <div class="container atmosphere-content reveal">
-    <div class="kicker" style="color:var(--caramel)">
-      THE HOUSE PHILOSOPHY
-    </div>
-    <h2>
-      COME AS<br>
-      YOU <em class="italic">Are.</em>
-    </h2>
-    <p class="copy">
-      No rush. No pressure. Just good music,
-      a comfortable chair, great conversation,
-      and someone who takes pride in getting
-      every detail right.
-    </p>
-  </div>
-</section>
-
-<!-- BARBERS -->
-
-<section class="artists" id="artists">
-  <div class="container">
-    <div class="artists-heading reveal">
-      <div>
-        <div class="kicker">003 / THE PEOPLE</div>
-        <h2 class="section-title">
-          GOOD HANDS.<br>
-          <span class="italic">Good Company.</span>
-        </h2>
-      </div>
-      <p class="copy" style="max-width:310px;color:#765f4d">
-        Every great barbershop has its personalities.
-        Meet the fictional artists behind our
-        grooming house concept.
-      </p>
-    </div>
-
-    <div class="artist-grid" id="artistGrid"></div>
-  </div>
-</section>
-
-<!-- LOOKBOOK -->
-
-<section class="lookbook" id="lookbook">
-  <div class="container">
-    <div class="lookbook-top reveal">
-      <div>
-        <div class="kicker" style="color:var(--caramel)">
-          004 / THE LOOKBOOK
-        </div>
-        <h2 class="section-title">
-          FIND YOUR<br>
-          <span class="italic" style="color:var(--caramel)">
-            Look.
-          </span>
-        </h2>
-      </div>
-
-      <div class="lookbook-controls">
-        <button class="circle-btn" id="lookPrev"
-                type="button" aria-label="Previous look">
-          ←
-        </button>
-        <button class="circle-btn" id="lookNext"
-                type="button" aria-label="Next look">
-          →
-        </button>
-      </div>
-    </div>
-
-    <div class="lookbook-track" id="lookbookTrack"
-         aria-label="Swipeable haircut inspiration gallery">
-    </div>
-
-    <p class="lookbook-note">
-      Swipe to explore. Tap any photograph for a closer look.
-      Images are illustrative stock photography.
-    </p>
-  </div>
-</section>
-
-<!-- BOOKING -->
-
-<section class="booking" id="booking">
-  <div class="container">
-    <div class="booking-head reveal">
-      <div class="kicker">005 / YOUR EXPERIENCE</div>
-      <h2 class="section-title">
-        YOUR CHAIR<br>
-        <span class="italic">Is Waiting.</span>
-      </h2>
-      <p class="copy" style="color:#765f4d">
-        Try our custom appointment experience.
-        Choose your service, barber, date, and time
-        to see how a real online booking journey
-        could work.
-      </p>
-    </div>
-
-    <div class="booking-shell">
-      <div class="booking-workspace reveal">
-        <div class="progress" id="bookingProgress"
-             aria-label="Booking progress">
-          <span class="active"></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-
-        <div id="bookingContent" aria-live="polite"></div>
-
-        <div class="booking-actions">
-          <button id="bookingBack" type="button">
-            ← BACK
-          </button>
-          <button class="next" id="bookingNext"
-                  type="button">
-            CONTINUE →
-          </button>
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-wordmark">NOIR <b>&</b><br>BLADE.</div>
+        <div class="footer-links">
+          <a href="#home">Home</a>
+          <a href="#services">Services</a>
+          <a href="#experience">Experience</a>
+          <a href="#artists">Barbers</a>
+          <a href="#lookbook">Lookbook</a>
+          <a href="#booking">Booking</a>
         </div>
       </div>
-
-      <aside class="booking-summary reveal">
-        <div class="kicker" style="color:var(--caramel)">
-          YOUR APPOINTMENT
-        </div>
-        <h3>The Details</h3>
-
-        <div class="summary-row">
-          <span>Service</span>
-          <strong id="summaryService">Not selected</strong>
-        </div>
-        <div class="summary-row">
-          <span>Barber</span>
-          <strong id="summaryBarber">Not selected</strong>
-        </div>
-        <div class="summary-row">
-          <span>Date</span>
-          <strong id="summaryDate">Not selected</strong>
-        </div>
-        <div class="summary-row">
-          <span>Time</span>
-          <strong id="summaryTime">Not selected</strong>
-        </div>
-        <div class="summary-row">
-          <span>Duration</span>
-          <strong id="summaryDuration">—</strong>
-        </div>
-
-        <div class="summary-total">
-          <span>Estimated Total</span>
-          <strong id="summaryTotal">$0.00</strong>
-        </div>
-
-        <p class="booking-note">
-          DEMONSTRATION ONLY.<br>
-          No actual availability is checked.
-          No payment is processed, and no appointment
-          is booked or stored.
-        </p>
-      </aside>
-    </div>
-  </div>
-</section>
-
-<!-- VISIT -->
-
-<section class="visit" id="visit">
-  <div class="container visit-layout">
-    <div class="visit-photo reveal">
-      <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1100&q=85"
-           alt="Inviting barbershop interior"
-           loading="lazy">
-    </div>
-
-    <div class="visit-info reveal">
-      <div class="kicker" style="color:var(--caramel)">
-        006 / THE HOUSE
-      </div>
-      <h2 class="section-title">
-        ALWAYS A<br>
-        <span class="italic" style="color:var(--caramel)">
-          Good Time.
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> NOIR & BLADE — Fictional Portfolio Concept</span>
+        <span>Custom Designed & Developed by
+          <a href="https://syntax-labs-website.pages.dev/"
+             target="_blank" rel="noopener noreferrer">SYNTAX LABS ↗</a>
         </span>
-      </h2>
-      <p>
-        The best barbershops feel like a second home.
-        A familiar face, a welcoming atmosphere,
-        and a fresh cut that makes your day.
-      </p>
-
-      <div class="hours">
-        <div><span>Monday – Friday</span><span>9 AM – 7 PM</span></div>
-        <div><span>Saturday</span><span>10 AM – 6 PM</span></div>
-        <div><span>Sunday</span><span>Closed</span></div>
       </div>
-
-      <p style="font-size:12px;margin-top:20px">
-        Sample business hours only. NOIR & BLADE
-        is a fictional barbershop and has no
-        physical storefront.
-      </p>
-
-      <a class="arrow-link"
-         href="https://syntax-labs-website.pages.dev/"
-         target="_blank" rel="noopener noreferrer">
-        <span>EXPLORE SYNTAX LABS</span>
-        <span>↗</span>
-      </a>
     </div>
+  </footer>
+
+  <a href="#booking" class="button floating-book">BOOK A CHAIR ↗</a>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true"
+       aria-label="Lookbook photograph" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close photo">×</button>
+    <img id="lightboxPhoto" alt="">
+    <p id="lightboxCaption"></p>
   </div>
-</section>
 
-</main>
-
-<!-- FOOTER -->
-
-<footer>
-  <div class="container">
-    <div class="footer-top">
-      <div class="footer-big">
-        NOIR <span>&</span><br>BLADE.
-      </div>
-
-      <div class="footer-links">
-        <a href="#home">Home</a>
-        <a href="#services">Services</a>
-        <a href="#artists">Barbers</a>
-        <a href="#lookbook">Lookbook</a>
-        <a href="#booking">Booking</a>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <span>
-        © <span id="year"></span> NOIR & BLADE
-        — Fictional Portfolio Demonstration
-      </span>
-      <span>
-        CUSTOM DESIGNED & DEVELOPED BY
-        <a href="https://syntax-labs-website.pages.dev/"
-           target="_blank" rel="noopener noreferrer">
-          SYNTAX LABS ↗
-        </a>
-      </span>
-    </div>
-  </div>
-</footer>
-
-<a href="#booking" class="pill floating-book">
-  BOOK A CHAIR ↗
-</a>
-
-<!-- LOOKBOOK LIGHTBOX -->
-
-<div class="lightbox" id="lightbox"
-     role="dialog" aria-modal="true"
-     aria-label="Lookbook photograph"
-     aria-hidden="true">
-  <button id="lightboxClose" type="button"
-          aria-label="Close photograph">×</button>
-  <img id="lightboxImage" alt="">
-  <p id="lightboxCaption"></p>
-</div>
 
 <script>
 "use strict";
 
-/* ==========================================
-   NOIR & BLADE — CUSTOM DEMO EXPERIENCE
-   Created by Syntax Labs
-
-   No database.
-   No real bookings.
-   No payment processing.
-   No personal data collection.
-========================================== */
-
 const $ = id => document.getElementById(id);
+const motionReduced = matchMedia("(prefers-reduced-motion: reduce)");
 
-const reducedMotion = window.matchMedia(
-  "(prefers-reduced-motion: reduce)"
-);
-
-const money = n => "$" + n.toFixed(2);
-
-function escapeHTML(value){
-  return String(value).replace(/[&<>"']/g,c=>({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#39;"
-  }[c]));
-}
-
-function localISO(date){
-  const y = date.getFullYear();
-  const m = String(date.getMonth()+1).padStart(2,"0");
-  const d = String(date.getDate()).padStart(2,"0");
-  return `${y}-${m}-${d}`;
-}
-
-function prettyDate(value){
-  if(!value) return "Not selected";
-  const date = new Date(value+"T12:00:00");
-  if(Number.isNaN(date.getTime())) return "Not selected";
-  return date.toLocaleDateString("en-US",{
-    weekday:"short",
-    month:"short",
-    day:"numeric",
-    year:"numeric"
-  });
-}
-
-function goToBooking(){
-  $("booking").scrollIntoView({
-    behavior:reducedMotion.matches?"auto":"smooth"
-  });
-}
-
-/* BUSINESS DATA — FICTIONAL */
+const photos = {
+  shop: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1100&q=85",
+  cut: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1100&q=85",
+  beard: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=1100&q=85",
+  classic: "https://images.unsplash.com/photo-1593702295094-aea22597af65?auto=format&fit=crop&w=1100&q=85",
+  detail: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1100&q=85"
+};
 
 const services = [
   {
-    id:"house",
-    name:"The House Cut",
-    price:35,
-    duration:45,
-    description:"A tailored haircut, thoughtful consultation, and a finish that feels just right.",
-    image:"https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1000&q=85"
+    id: "house",
+    name: "The House Cut",
+    price: 35,
+    minutes: 45,
+    image: photos.cut,
+    description: "A tailored haircut, thoughtful consultation, and a clean finish that feels just right."
   },
   {
-    id:"fade",
-    name:"The Fresh Fade",
-    price:40,
-    duration:50,
-    description:"Smooth transitions, sharp details, and a clean look built around your style.",
-    image:"https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1000&q=85"
+    id: "fade",
+    name: "The Fresh Fade",
+    price: 40,
+    minutes: 50,
+    image: photos.classic,
+    description: "Smooth transitions, sharp details, and a modern look built around your style."
   },
   {
-    id:"beard",
-    name:"Beard & Beyond",
-    price:25,
-    duration:30,
-    description:"Careful shaping, clean lines, and a well-groomed finish.",
-    image:"https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=1000&q=85"
+    id: "beard",
+    name: "Beard & Beyond",
+    price: 25,
+    minutes: 30,
+    image: photos.beard,
+    description: "Careful shaping, clean lines, and a well-groomed finish."
   },
   {
-    id:"classic",
-    name:"The Classic",
-    price:38,
-    duration:45,
-    description:"Timeless scissor work and traditional barbering with a modern touch.",
-    image:"https://images.unsplash.com/photo-1593702295094-aea22597af65?auto=format&fit=crop&w=1000&q=85"
+    id: "classic",
+    name: "The Classic",
+    price: 38,
+    minutes: 45,
+    image: photos.shop,
+    description: "Traditional scissor work with a relaxed, modern touch."
   },
   {
-    id:"full",
-    name:"The Full Experience",
-    price:65,
-    duration:75,
-    description:"Haircut, beard detailing, and finishing touches. The complete reset.",
-    image:"https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1000&q=85"
+    id: "full",
+    name: "The Full Experience",
+    price: 65,
+    minutes: 75,
+    image: photos.detail,
+    description: "Haircut, beard detailing, and finishing touches. Your complete grooming reset."
   }
 ];
 
 const barbers = [
   {
-    id:"marcus",
-    name:"Marcus Cole",
-    role:"The Classic Specialist",
-    description:"Clean cuts and timeless craftsmanship.",
-    image:"https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=850&q=85"
+    id: "marcus",
+    name: "Marcus Cole",
+    specialty: "Classic Cuts & Styling",
+    image: photos.classic
   },
   {
-    id:"jordan",
-    name:"Jordan Reyes",
-    role:"The Fade Artist",
-    description:"Modern fades and detailed finishing.",
-    image:"https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=850&q=85"
+    id: "jordan",
+    name: "Jordan Reyes",
+    specialty: "Modern Fades & Detail",
+    image: photos.cut
   },
   {
-    id:"alex",
-    name:"Alex Morgan",
-    role:"The Grooming Expert",
-    description:"Beard shaping and personalized styling.",
-    image:"https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=850&q=85"
+    id: "alex",
+    name: "Alex Morgan",
+    specialty: "Beard Grooming & Finishing",
+    image: photos.beard
   }
 ];
 
 const looks = [
-  {
-    name:"The Precision Cut",
-    category:"Modern Grooming",
-    image:"https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=1100&q=85"
-  },
-  {
-    name:"The Classic Finish",
-    category:"Timeless Style",
-    image:"https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1100&q=85"
-  },
-  {
-    name:"The Grooming Ritual",
-    category:"Beard & Detail",
-    image:"https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=1100&q=85"
-  },
-  {
-    name:"The Modern Edge",
-    category:"Contemporary Style",
-    image:"https://images.unsplash.com/photo-1593702295094-aea22597af65?auto=format&fit=crop&w=1100&q=85"
-  }
+  { title: "The Precision Cut", type: "Modern Grooming", image: photos.cut },
+  { title: "The Classic Finish", type: "Traditional Style", image: photos.classic },
+  { title: "The Grooming Ritual", type: "Beard & Detail", image: photos.beard },
+  { title: "The House Experience", type: "Barbershop Culture", image: photos.shop }
 ];
 
-/* ==========================================
-   FULL SCREEN NAVIGATION
-========================================== */
+const booking = {
+  step: 0,
+  service: null,
+  barber: null,
+  date: "",
+  time: "",
+  finished: false
+};
 
-const menuToggle = $("menuToggle");
-const fullMenu = $("fullMenu");
+const money = value => "$" + value.toFixed(2);
+const pad = value => String(value).padStart(2, "0");
 
-function setMenu(open){
-  fullMenu.classList.toggle("open",open);
-  fullMenu.inert = !open;
-  menuToggle.setAttribute("aria-expanded",String(open));
-  menuToggle.setAttribute(
-    "aria-label",
-    open?"Close navigation":"Open navigation"
-  );
-  document.body.classList.toggle("menu-open",open);
+function localDateKey(date) {
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
 }
 
-menuToggle.addEventListener("click",()=>{
-  setMenu(!fullMenu.classList.contains("open"));
+function parseDateKey(key) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(key)) return null;
+  const [year, month, day] = key.split("-").map(Number);
+  const date = new Date(year, month - 1, day, 12);
+  return date.getFullYear() === year &&
+    date.getMonth() === month - 1 &&
+    date.getDate() === day ? date : null;
+}
+
+function formatDate(key) {
+  const date = parseDateKey(key);
+  return date ? date.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  }) : "Not selected";
+}
+
+function today() {
+  const date = new Date();
+  date.setHours(12, 0, 0, 0);
+  return date;
+}
+
+function lastBookingDate() {
+  const date = today();
+  date.setDate(date.getDate() + 60);
+  return date;
+}
+
+function selectedService() {
+  return services.find(item => item.id === booking.service);
+}
+
+function selectedBarber() {
+  return barbers.find(item => item.id === booking.barber);
+}
+
+function scrollToBooking() {
+  $("booking").scrollIntoView({
+    behavior: motionReduced.matches ? "auto" : "smooth"
+  });
+}
+
+/* Navigation */
+
+const menuButton = $("menuButton");
+const siteMenu = $("siteMenu");
+
+function setMenu(open) {
+  siteMenu.classList.toggle("is-open", open);
+  siteMenu.inert = !open;
+  menuButton.setAttribute("aria-expanded", String(open));
+  menuButton.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+  document.body.classList.toggle("is-locked", open);
+}
+
+menuButton.addEventListener("click", () => {
+  setMenu(!siteMenu.classList.contains("is-open"));
 });
 
-fullMenu.querySelectorAll("a").forEach(link=>{
-  link.addEventListener("click",()=>setMenu(false));
+siteMenu.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => setMenu(false));
 });
 
-/* ==========================================
-   EDITORIAL SERVICE SELECTOR
-========================================== */
+/* Services */
 
-let activeService = "house";
+let highlightedService = services[0].id;
 
-function renderServices(){
-  $("serviceList").innerHTML = services.map((s,i)=>`
-    <button class="service-row ${s.id===activeService?"active":""}"
-            type="button" data-service="${s.id}"
-            aria-pressed="${s.id===activeService}">
-      <span class="service-number">
-        ${String(i+1).padStart(2,"0")}
-      </span>
-      <span class="service-name">
-        ${escapeHTML(s.name)}
-      </span>
-      <span class="service-price">
-        ${money(s.price)}
-      </span>
+function renderServices() {
+  $("serviceList").innerHTML = services.map((service, index) => `
+    <button class="service-item ${service.id === highlightedService ? "is-active" : ""}"
+            type="button" data-service="${service.id}"
+            aria-pressed="${service.id === highlightedService}">
+      <span class="number">${pad(index + 1)}</span>
+      <span class="name">${service.name}</span>
+      <span class="price">${money(service.price)}</span>
     </button>
   `).join("");
 
-  $("serviceList").querySelectorAll("[data-service]")
-    .forEach(button=>{
-      button.addEventListener("click",()=>{
-        activeService = button.dataset.service;
-        updateServiceVisual();
-        renderServices();
-      });
+  $("serviceList").querySelectorAll("[data-service]").forEach(button => {
+    button.addEventListener("click", () => {
+      highlightedService = button.dataset.service;
+      renderServices();
+      updateServiceFeature();
     });
+  });
 }
 
-function updateServiceVisual(){
-  const s = services.find(item=>item.id===activeService);
-
-  $("serviceImage").src = s.image;
-  $("serviceImage").alt = s.name+" — grooming inspiration";
-  $("serviceVisualName").textContent = s.name;
-  $("serviceVisualDescription").textContent = s.description;
+function updateServiceFeature() {
+  const service = services.find(item => item.id === highlightedService);
+  $("servicePhoto").src = service.image;
+  $("servicePhoto").alt = `${service.name} — illustrative barbering photograph`;
+  $("serviceTitle").textContent = service.name;
+  $("serviceDescription").textContent = service.description;
 }
 
-$("serviceBookLink").addEventListener("click",()=>{
-  booking.service = activeService;
+$("serviceBooking").addEventListener("click", () => {
+  booking.service = highlightedService;
   booking.step = 1;
-  booking.complete = false;
+  booking.finished = false;
   renderBooking();
 });
 
-/* ==========================================
-   BARBER PROFILES
-========================================== */
+/* Barber profiles */
 
-function renderArtists(){
-  $("artistGrid").innerHTML = barbers.map((barber,i)=>`
-    <article class="artist-card reveal">
-      <div class="artist-image">
-        <img src="${barber.image}"
-             alt="Illustrative barbershop photography"
-             loading="lazy">
-        <span class="artist-tag">
-          ARTIST / ${String(i+1).padStart(2,"0")}
-        </span>
+function renderArtists() {
+  $("artistGrid").innerHTML = barbers.map((barber, index) => `
+    <article class="artist-card">
+      <div class="artist-photo">
+        <img src="${barber.image}" loading="lazy"
+             alt="Illustrative photograph for fictional barber ${barber.name}">
       </div>
-      <h3>${escapeHTML(barber.name)}</h3>
-      <p>
-        ${escapeHTML(barber.role)}<br>
-        ${escapeHTML(barber.description)}
-      </p>
+      <span class="eyebrow bronze" style="margin-top:18px">
+        BARBER / ${pad(index + 1)}
+      </span>
+      <h3>${barber.name}</h3>
+      <p>${barber.specialty}</p>
       <button type="button" data-artist="${barber.id}">
-        SELECT THIS BARBER ↗
+        CHOOSE THIS BARBER ↗
       </button>
     </article>
   `).join("");
 
-  $("artistGrid").querySelectorAll("[data-artist]")
-    .forEach(button=>{
-      button.addEventListener("click",()=>{
-        booking.barber = button.dataset.artist;
-        booking.step = booking.service?2:0;
-        booking.complete = false;
-        renderBooking();
-        goToBooking();
-      });
+  $("artistGrid").querySelectorAll("[data-artist]").forEach(button => {
+    button.addEventListener("click", () => {
+      booking.barber = button.dataset.artist;
+      booking.step = booking.service ? 2 : 0;
+      booking.finished = false;
+      renderBooking();
+      scrollToBooking();
     });
-}
-
-/* ==========================================
-   SWIPEABLE LOOKBOOK
-========================================== */
-
-function renderLookbook(){
-  $("lookbookTrack").innerHTML = looks.map((look,i)=>`
-    <button class="lookbook-item" type="button"
-            data-look="${i}"
-            aria-label="View ${escapeHTML(look.name)}">
-      <img src="${look.image}"
-           alt="${escapeHTML(look.name)} inspiration"
-           loading="lazy">
-      <strong>${escapeHTML(look.name)}</strong>
-      <span>${escapeHTML(look.category)} ↗</span>
-    </button>
-  `).join("");
-
-  $("lookbookTrack").querySelectorAll("[data-look]")
-    .forEach(button=>{
-      button.addEventListener("click",()=>{
-        openLightbox(Number(button.dataset.look));
-      });
-    });
-}
-
-function scrollLookbook(direction){
-  const track = $("lookbookTrack");
-  const item = track.querySelector(".lookbook-item");
-
-  if(!item) return;
-
-  const gap = parseFloat(getComputedStyle(track).gap)||17;
-
-  track.scrollBy({
-    left:direction*(item.getBoundingClientRect().width+gap),
-    behavior:reducedMotion.matches?"auto":"smooth"
   });
 }
 
-$("lookPrev").addEventListener("click",()=>scrollLookbook(-1));
-$("lookNext").addEventListener("click",()=>scrollLookbook(1));
+/* Before / after comparison */
 
-let previousLightboxFocus = null;
+const comparisonRange = $("comparisonRange");
 
-function openLightbox(index){
+function updateComparison() {
+  $("comparison").style.setProperty("--split", comparisonRange.value + "%");
+}
+
+comparisonRange.addEventListener("input", updateComparison);
+updateComparison();
+
+/* Lookbook */
+
+function renderLookbook() {
+  $("lookbookTrack").innerHTML = looks.map((look, index) => `
+    <button class="lookbook-item" type="button" data-look="${index}"
+            aria-label="View ${look.title}">
+      <img src="${look.image}" loading="lazy" alt="${look.title} inspiration">
+      <strong>${look.title}</strong>
+      <small>${look.type} ↗</small>
+    </button>
+  `).join("");
+
+  $("lookbookTrack").querySelectorAll("[data-look]").forEach(button => {
+    button.addEventListener("click", () => {
+      openLightbox(Number(button.dataset.look));
+    });
+  });
+}
+
+function moveLookbook(direction) {
+  const track = $("lookbookTrack");
+  const item = track.querySelector(".lookbook-item");
+  if (!item) return;
+
+  const gap = parseFloat(getComputedStyle(track).gap) || 18;
+
+  track.scrollBy({
+    left: direction * (item.getBoundingClientRect().width + gap),
+    behavior: motionReduced.matches ? "auto" : "smooth"
+  });
+}
+
+$("lookPrev").addEventListener("click", () => moveLookbook(-1));
+$("lookNext").addEventListener("click", () => moveLookbook(1));
+
+let lightboxPreviousFocus = null;
+
+function openLightbox(index) {
   const look = looks[index];
-  if(!look) return;
+  if (!look) return;
 
-  previousLightboxFocus = document.activeElement;
-
-  $("lightboxImage").src = look.image;
-  $("lightboxImage").alt = look.name;
-  $("lightboxCaption").textContent = look.name;
-  $("lightbox").classList.add("open");
-  $("lightbox").setAttribute("aria-hidden","false");
-  document.body.classList.add("lightbox-open");
+  lightboxPreviousFocus = document.activeElement;
+  $("lightboxPhoto").src = look.image;
+  $("lightboxPhoto").alt = look.title;
+  $("lightboxCaption").textContent = look.title;
+  $("lightbox").classList.add("is-open");
+  $("lightbox").setAttribute("aria-hidden", "false");
+  document.body.classList.add("is-locked");
   $("lightboxClose").focus();
 }
 
-function closeLightbox(){
-  if(!$("lightbox").classList.contains("open")) return;
+function closeLightbox() {
+  if (!$("lightbox").classList.contains("is-open")) return;
 
-  $("lightbox").classList.remove("open");
-  $("lightbox").setAttribute("aria-hidden","true");
-  document.body.classList.remove("lightbox-open");
-  $("lightboxImage").removeAttribute("src");
+  $("lightbox").classList.remove("is-open");
+  $("lightbox").setAttribute("aria-hidden", "true");
+  $("lightboxPhoto").removeAttribute("src");
+  document.body.classList.remove("is-locked");
 
-  if(previousLightboxFocus){
-    previousLightboxFocus.focus();
-  }
+  if (lightboxPreviousFocus) lightboxPreviousFocus.focus();
 }
 
-$("lightboxClose").addEventListener("click",closeLightbox);
+$("lightboxClose").addEventListener("click", closeLightbox);
 
-$("lightbox").addEventListener("click",event=>{
-  if(event.target===$("lightbox")) closeLightbox();
+$("lightbox").addEventListener("click", event => {
+  if (event.target === $("lightbox")) closeLightbox();
 });
 
-$("lightbox").addEventListener("keydown",event=>{
-  if(event.key==="Tab"){
+$("lightbox").addEventListener("keydown", event => {
+  if (event.key === "Tab") {
     event.preventDefault();
     $("lightboxClose").focus();
   }
 });
 
-document.addEventListener("keydown",event=>{
-  if(event.key==="Escape"){
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
     closeLightbox();
     setMenu(false);
   }
 });
 
-/* ==========================================
-   CUSTOM BOOKING EXPERIENCE
-========================================== */
+/* Calendar */
 
-const booking = {
-  step:0,
-  service:null,
-  barber:null,
-  date:"",
-  time:"",
-  complete:false
-};
+let visibleMonth = new Date(today().getFullYear(), today().getMonth(), 1);
 
-const sampleTimes = [
-  "9:00 AM",
-  "10:00 AM",
-  "11:00 AM",
-  "12:00 PM",
-  "1:00 PM",
-  "2:00 PM",
-  "3:00 PM",
-  "4:00 PM",
-  "5:00 PM"
-];
+function isBookableDay(date) {
+  const start = today();
+  const end = lastBookingDate();
 
-function currentService(){
-  return services.find(s=>s.id===booking.service);
+  return date >= start &&
+    date <= end &&
+    date.getDay() !== 0;
 }
 
-function currentBarber(){
-  return barbers.find(b=>b.id===booking.barber);
+function renderCalendar() {
+  const year = visibleMonth.getFullYear();
+  const month = visibleMonth.getMonth();
+  const firstDay = new Date(year, month, 1);
+  const dayCount = new Date(year, month + 1, 0).getDate();
+
+  const earliestMonth = new Date(today().getFullYear(), today().getMonth(), 1);
+  const latest = lastBookingDate();
+  const latestMonth = new Date(latest.getFullYear(), latest.getMonth(), 1);
+
+  let days = "";
+
+  for (let i = 0; i < firstDay.getDay(); i++) {
+    days += `<span class="calendar-empty" aria-hidden="true"></span>`;
+  }
+
+  for (let day = 1; day <= dayCount; day++) {
+    const date = new Date(year, month, day, 12);
+    const key = localDateKey(date);
+    const enabled = isBookableDay(date);
+    const selected = booking.date === key;
+
+    days += `
+      <button type="button" data-date="${key}"
+              aria-label="${formatDate(key)}"
+              aria-pressed="${selected}"
+              class="${selected ? "is-selected" : ""}"
+              ${enabled ? "" : "disabled"}>
+        ${day}
+      </button>
+    `;
+  }
+
+  $("bookingContent").innerHTML = `
+    <span class="eyebrow">Step 03 / Choose Your Day</span>
+    <h3>When should we see you?</h3>
+    <p>
+      Select a sample appointment date.
+      Sundays are closed. Dates are not linked
+      to real barber availability.
+    </p>
+
+    <div class="calendar">
+      <div class="calendar-header">
+        <strong>${visibleMonth.toLocaleDateString("en-US", {
+          month: "long",
+          year: "numeric"
+        })}</strong>
+        <div class="calendar-nav">
+          <button id="previousMonth" type="button"
+                  aria-label="Previous month"
+                  ${visibleMonth <= earliestMonth ? "disabled" : ""}>←</button>
+          <button id="nextMonth" type="button"
+                  aria-label="Next month"
+                  ${visibleMonth >= latestMonth ? "disabled" : ""}>→</button>
+        </div>
+      </div>
+      <div class="calendar-weekdays">
+        <span>SU</span><span>MO</span><span>TU</span>
+        <span>WE</span><span>TH</span><span>FR</span><span>SA</span>
+      </div>
+      <div class="calendar-days">${days}</div>
+    </div>
+  `;
+
+  $("previousMonth").addEventListener("click", () => {
+    visibleMonth = new Date(year, month - 1, 1);
+    renderCalendar();
+  });
+
+  $("nextMonth").addEventListener("click", () => {
+    visibleMonth = new Date(year, month + 1, 1);
+    renderCalendar();
+  });
+
+  $("bookingContent").querySelectorAll("[data-date]").forEach(button => {
+    button.addEventListener("click", () => {
+      const date = parseDateKey(button.dataset.date);
+      if (!date || !isBookableDay(date)) return;
+
+      booking.date = button.dataset.date;
+      booking.time = "";
+      renderBooking();
+    });
+  });
 }
 
-function updateSummary(){
-  const s = currentService();
-  const b = currentBarber();
+/* Sample appointment times */
 
-  $("summaryService").textContent = s?s.name:"Not selected";
-  $("summaryBarber").textContent = b?b.name:"Not selected";
-  $("summaryDate").textContent = prettyDate(booking.date);
-  $("summaryTime").textContent = booking.time||"Not selected";
-  $("summaryDuration").textContent = s?s.duration+" min":"—";
-  $("summaryTotal").textContent = s?money(s.price):"$0.00";
+function formatClock(minutes) {
+  const hour24 = Math.floor(minutes / 60);
+  const minute = minutes % 60;
+  const suffix = hour24 >= 12 ? "PM" : "AM";
+  const hour12 = hour24 % 12 || 12;
+  return `${hour12}:${pad(minute)} ${suffix}`;
 }
 
-function bookingOption(label,sub,value,selected,attribute){
+function availableSampleTimes() {
+  const date = parseDateKey(booking.date);
+  const service = selectedService();
+
+  if (!date || !service || !isBookableDay(date)) return [];
+
+  const saturday = date.getDay() === 6;
+  const opening = saturday ? 10 * 60 : 9 * 60;
+  const closing = saturday ? 18 * 60 : 19 * 60;
+  const times = [];
+
+  for (let start = opening; start + service.minutes <= closing; start += 60) {
+    times.push(formatClock(start));
+  }
+
+  return times;
+}
+
+/* Booking flow */
+
+function bookingChoice(label, detail, value, selected, attribute) {
   return `
-    <button type="button"
-            class="booking-option ${selected?"selected":""}"
-            ${attribute}="${escapeHTML(value)}"
+    <button class="booking-choice ${selected ? "is-selected" : ""}"
+            type="button" ${attribute}="${value}"
             aria-pressed="${selected}">
-      <strong>${escapeHTML(label)}</strong>
-      <small>${escapeHTML(sub)}</small>
+      <strong>${label}</strong>
+      <small>${detail}</small>
     </button>
   `;
 }
 
-function renderBooking(){
-  updateSummary();
+function updateBookingSummary() {
+  const service = selectedService();
+  const barber = selectedBarber();
 
-  const content = $("bookingContent");
-  const back = $("bookingBack");
-  const next = $("bookingNext");
+  $("summaryService").textContent = service ? service.name : "Not selected";
+  $("summaryBarber").textContent = barber ? barber.name : "Not selected";
+  $("summaryDate").textContent = formatDate(booking.date);
+  $("summaryTime").textContent = booking.time || "Not selected";
+  $("summaryDuration").textContent = service ? service.minutes + " min" : "—";
+  $("summaryTotal").textContent = service ? money(service.price) : "$0.00";
+}
 
-  $("bookingProgress").querySelectorAll("span")
-    .forEach((bar,i)=>{
-      bar.classList.toggle("active",i<=booking.step);
-    });
+function renderBooking() {
+  updateBookingSummary();
 
-  back.hidden = booking.step===0||booking.complete;
-  next.hidden = booking.complete;
+  $("bookingProgress").querySelectorAll("i").forEach((bar, index) => {
+    bar.classList.toggle("is-active", index <= booking.step);
+  });
 
-  if(booking.complete){
-    const s = currentService();
-    const b = currentBarber();
+  $("bookingBack").hidden = booking.step === 0 || booking.finished;
+  $("bookingNext").hidden = booking.finished;
 
-    content.innerHTML = `
-      <div class="kicker">YOUR EXPERIENCE / COMPLETE</div>
-      <h3 class="booking-step-title">
-        LOOKING GOOD ALREADY.
-      </h3>
-      <p class="booking-help">
-        Here's how your appointment preview turned out.
-      </p>
+  if (booking.finished) {
+    const service = selectedService();
+    const barber = selectedBarber();
 
-      <div class="preview-success">
-        <strong>APPOINTMENT PREVIEW</strong>
+    $("bookingContent").innerHTML = `
+      <span class="eyebrow">Appointment Preview</span>
+      <h3>Looking good already.</h3>
+      <p>Here's how your sample appointment would look.</p>
+      <div class="booking-result">
+        <strong>${service.name}</strong><br>
+        With ${barber.name}<br>
+        ${formatDate(booking.date)}<br>
+        ${booking.time}<br>
+        ${money(service.price)}
         <p>
-          ${escapeHTML(s.name)}<br>
-          With ${escapeHTML(b.name)}<br>
-          ${escapeHTML(prettyDate(booking.date))}<br>
-          ${escapeHTML(booking.time)}
-        </p>
-        <strong>${money(s.price)}</strong>
-        <p>
-          This is a fictional demonstration.
+          This is a demonstration only.
           No appointment was reserved, confirmed,
           transmitted, or saved.
         </p>
       </div>
-
-      <button class="pill" id="restartBooking"
+      <button class="button" id="restartBooking"
               type="button" style="margin-top:25px">
         START AGAIN ↻
       </button>
     `;
 
-    $("restartBooking").addEventListener("click",()=>{
-      Object.assign(booking,{
-        step:0,
-        service:null,
-        barber:null,
-        date:"",
-        time:"",
-        complete:false
+    $("restartBooking").addEventListener("click", () => {
+      Object.assign(booking, {
+        step: 0,
+        service: null,
+        barber: null,
+        date: "",
+        time: "",
+        finished: false
       });
+      visibleMonth = new Date(today().getFullYear(), today().getMonth(), 1);
       renderBooking();
     });
-
     return;
   }
 
-  if(booking.step===0){
-    content.innerHTML = `
-      <div class="kicker">STEP 01 / THE SERVICE</div>
-      <h3 class="booking-step-title">
-        What are we doing today?
-      </h3>
-      <p class="booking-help">
-        Choose your grooming experience.
-      </p>
+  if (booking.step === 0) {
+    $("bookingContent").innerHTML = `
+      <span class="eyebrow">Step 01 / The Service</span>
+      <h3>What are we doing today?</h3>
+      <p>Choose the grooming experience that suits you.</p>
       <div class="booking-options">
-        ${services.map(s=>bookingOption(
-          s.name,
-          money(s.price)+" • "+s.duration+" minutes",
-          s.id,
-          booking.service===s.id,
+        ${services.map(service => bookingChoice(
+          service.name,
+          `${money(service.price)} · ${service.minutes} minutes`,
+          service.id,
+          booking.service === service.id,
           "data-book-service"
         )).join("")}
       </div>
     `;
 
-    content.querySelectorAll("[data-book-service]")
-      .forEach(button=>{
-        button.addEventListener("click",()=>{
-          booking.service = button.dataset.bookService;
-          renderBooking();
-        });
+    $("bookingContent").querySelectorAll("[data-book-service]").forEach(button => {
+      button.addEventListener("click", () => {
+        const changed = booking.service !== button.dataset.bookService;
+        booking.service = button.dataset.bookService;
+        if (changed) booking.time = "";
+        renderBooking();
       });
+    });
 
-    next.disabled = !booking.service;
-    next.textContent = "CHOOSE BARBER →";
+    $("bookingNext").disabled = !booking.service;
+    $("bookingNext").textContent = "CHOOSE BARBER →";
   }
 
-  if(booking.step===1){
-    content.innerHTML = `
-      <div class="kicker">STEP 02 / THE ARTIST</div>
-      <h3 class="booking-step-title">
-        Who's taking care of you?
-      </h3>
-      <p class="booking-help">
-        Select your preferred barber.
-      </p>
+  if (booking.step === 1) {
+    $("bookingContent").innerHTML = `
+      <span class="eyebrow">Step 02 / The Barber</span>
+      <h3>Who's taking care of you?</h3>
+      <p>Choose your preferred barber.</p>
       <div class="booking-options">
-        ${barbers.map(b=>bookingOption(
-          b.name,
-          b.role,
-          b.id,
-          booking.barber===b.id,
+        ${barbers.map(barber => bookingChoice(
+          barber.name,
+          barber.specialty,
+          barber.id,
+          booking.barber === barber.id,
           "data-book-barber"
         )).join("")}
       </div>
     `;
 
-    content.querySelectorAll("[data-book-barber]")
-      .forEach(button=>{
-        button.addEventListener("click",()=>{
-          booking.barber = button.dataset.bookBarber;
-          renderBooking();
-        });
+    $("bookingContent").querySelectorAll("[data-book-barber]").forEach(button => {
+      button.addEventListener("click", () => {
+        booking.barber = button.dataset.bookBarber;
+        renderBooking();
       });
-
-    next.disabled = !booking.barber;
-    next.textContent = "CHOOSE DATE →";
-  }
-
-  if(booking.step===2){
-    const today = new Date();
-    const max = new Date();
-    max.setDate(today.getDate()+60);
-
-    const minValue = localISO(today);
-    const maxValue = localISO(max);
-
-    if(booking.date &&
-       (booking.date<minValue||booking.date>maxValue)){
-      booking.date="";
-      booking.time="";
-    }
-
-    content.innerHTML = `
-      <div class="kicker">STEP 03 / THE DAY</div>
-      <h3 class="booking-step-title">
-        When should we see you?
-      </h3>
-      <p class="booking-help">
-        Choose a sample date within the next
-        60 days. This is not a live calendar.
-      </p>
-      <label for="appointmentDate"
-             style="display:block;margin-top:25px;font-size:13px">
-        Preferred date
-      </label>
-      <input class="booking-date"
-             id="appointmentDate"
-             type="date"
-             min="${minValue}"
-             max="${maxValue}"
-             value="${booking.date}">
-    `;
-
-    const input = $("appointmentDate");
-
-    input.addEventListener("change",()=>{
-      const valid =
-        input.value>=input.min &&
-        input.value<=input.max;
-
-      booking.date = valid?input.value:"";
-      booking.time="";
-      next.disabled = !booking.date;
-      updateSummary();
     });
 
-    next.disabled = !booking.date;
-    next.textContent = "CHOOSE TIME →";
+    $("bookingNext").disabled = !booking.barber;
+    $("bookingNext").textContent = "CHOOSE DATE →";
   }
 
-  if(booking.step===3){
-    content.innerHTML = `
-      <div class="kicker">STEP 04 / THE TIME</div>
-      <h3 class="booking-step-title">
-        Let's make some time.
-      </h3>
-      <p class="booking-help">
-        Choose a sample appointment time for
-        ${escapeHTML(prettyDate(booking.date))}.
-        All slots are illustrative.
+  if (booking.step === 2) {
+    const date = parseDateKey(booking.date);
+    if (booking.date && (!date || !isBookableDay(date))) {
+      booking.date = "";
+      booking.time = "";
+    }
+
+    renderCalendar();
+    $("bookingNext").disabled = !booking.date;
+    $("bookingNext").textContent = "CHOOSE TIME →";
+  }
+
+  if (booking.step === 3) {
+    const times = availableSampleTimes();
+    if (!times.includes(booking.time)) booking.time = "";
+
+    $("bookingContent").innerHTML = `
+      <span class="eyebrow">Step 04 / The Time</span>
+      <h3>Let's make some time.</h3>
+      <p>
+        Choose a sample time for ${formatDate(booking.date)}.
+        These slots do not represent real availability.
       </p>
       <div class="booking-options">
-        ${sampleTimes.map(t=>bookingOption(
-          t,
-          "Sample time slot",
-          t,
-          booking.time===t,
+        ${times.map(time => bookingChoice(
+          time,
+          "Sample appointment slot",
+          time,
+          booking.time === time,
           "data-book-time"
         )).join("")}
       </div>
     `;
 
-    content.querySelectorAll("[data-book-time]")
-      .forEach(button=>{
-        button.addEventListener("click",()=>{
-          booking.time = button.dataset.bookTime;
-          renderBooking();
-        });
+    $("bookingContent").querySelectorAll("[data-book-time]").forEach(button => {
+      button.addEventListener("click", () => {
+        booking.time = button.dataset.bookTime;
+        renderBooking();
       });
+    });
 
-    next.disabled = !booking.time;
-    next.textContent = "PREVIEW APPOINTMENT →";
+    $("bookingNext").disabled = !booking.time;
+    $("bookingNext").textContent = "PREVIEW APPOINTMENT →";
   }
+
+  updateBookingSummary();
 }
 
-$("bookingBack").addEventListener("click",()=>{
-  if(booking.step>0 && !booking.complete){
+$("bookingBack").addEventListener("click", () => {
+  if (booking.step > 0 && !booking.finished) {
     booking.step--;
     renderBooking();
   }
 });
 
-$("bookingNext").addEventListener("click",()=>{
-  if(booking.step===0&&!booking.service) return;
-  if(booking.step===1&&!booking.barber) return;
-  if(booking.step===2&&!booking.date) return;
-  if(booking.step===3&&!booking.time) return;
+$("bookingNext").addEventListener("click", () => {
+  if (booking.step === 0 && !booking.service) return;
+  if (booking.step === 1 && !booking.barber) return;
+  if (booking.step === 2 && !booking.date) return;
+  if (booking.step === 3 && !booking.time) return;
 
-  if(booking.step<3){
+  if (booking.step < 3) {
     booking.step++;
-  }else{
-    booking.complete=true;
+  } else {
+    booking.finished = true;
   }
 
   renderBooking();
 });
 
-/* ==========================================
-   SCROLL REVEAL
-========================================== */
+/* Subtle entrance animations */
 
-function initializeReveals(){
+function setupReveals() {
   const elements = document.querySelectorAll(".reveal");
 
-  if(!("IntersectionObserver" in window)||
-     reducedMotion.matches){
-    elements.forEach(el=>el.classList.add("visible"));
+  if (motionReduced.matches || !("IntersectionObserver" in window)) {
+    elements.forEach(element => element.classList.add("is-visible"));
     return;
   }
 
-  const observer = new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add("visible");
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
         observer.unobserve(entry.target);
       }
     });
-  },{
-    threshold:.05,
-    rootMargin:"0px 0px 30px 0px"
+  }, {
+    threshold: .05,
+    rootMargin: "0px 0px 30px 0px"
   });
 
-  elements.forEach(el=>observer.observe(el));
-  document.body.classList.add("motion");
+  elements.forEach(element => observer.observe(element));
+  document.body.classList.add("has-motion");
 }
 
-/* ==========================================
-   INITIALIZATION
-========================================== */
+/* Start */
 
 $("year").textContent = new Date().getFullYear();
 
 renderServices();
-updateServiceVisual();
+updateServiceFeature();
 renderArtists();
 renderLookbook();
 renderBooking();
-initializeReveals();
-
-/*
-  NOIR & BLADE 2.0
-
-  A fully custom portfolio demonstration.
-
-  Business details and barber identities
-  are fictional.
-
-  Images are illustrative stock photographs.
-
-  Booking state is held in memory only.
-  No personal information is collected.
-  No external booking service is contacted.
-
-  Designed & Developed by Syntax Labs.
-*/
+setupReveals();
 
 </script>
 </body>
